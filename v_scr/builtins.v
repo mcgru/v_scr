@@ -56,6 +56,10 @@ pub fn test_filepath_exists(path string) Step {
     }
 }
 
+pub fn exists(path string) Step {
+    return test_filepath_exists(path)
+}
+
 pub fn test_empty() Step {
     return fn (mut pipe Pipe) ! {
         pipe.status = if active_stream(pipe).len == 0 { 0 } else { 1 }

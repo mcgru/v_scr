@@ -86,6 +86,28 @@ fn test_list_accumulates_stdout() {
     assert result.trimmed_string() == 'alphabeta'
 }
 
+fn test_pipe_helper_matches_run_pipeline_new_pipeline() {
+    result := v_scr.new_list(
+        v_scr.pipe(
+            v_scr.echo('alpha\nbeta\n'),
+            v_scr.grep('beta') or { panic(err) },
+        ),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'beta'
+}
+
+fn test_group_helper_matches_run_list_new_list() {
+    result := v_scr.new_list(
+        v_scr.group(
+            v_scr.echo('left'),
+            v_scr.echo('right'),
+        ),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'leftright'
+}
+
 fn test_sequence_call_uses_positional_args() {
     seq := v_scr.new_list(
         v_scr.echo_args(),

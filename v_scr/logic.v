@@ -1,5 +1,13 @@
 module v_scr
 
+pub fn pipe(steps ...Step) Step {
+    return run_pipeline(new_pipeline(...steps))
+}
+
+pub fn group(steps ...Step) Step {
+    return run_list(new_list(...steps))
+}
+
 pub fn run_pipeline(pipeline Pipeline) Step {
     return fn [pipeline] (mut pipe Pipe) ! {
         result := pipeline.run_into(mut pipe)!

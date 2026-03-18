@@ -51,14 +51,27 @@ that should usually be:
 
 ```v
 v_scr.new_list(
-    v_scr.run_pipeline(v_scr.new_pipeline(
+    v_scr.pipe(
         v_scr.echo('hello'),
         v_scr.write_to_file('/tmp/demo.txt'),
-    )),
+    ),
 )
 ```
 
 The `List` orchestrates. The `Pipeline` moves bytes.
+
+For nested orchestration helpers:
+
+- `pipe(...)` is shorthand for `run_pipeline(new_pipeline(...))`
+- `group(...)` is shorthand for `run_list(new_list(...))`
+
+For frequent file operations there are short aliases too:
+
+- `from_file(...)` / `from_f(...)` -> `cat_file(...)`
+- `to_file(...)` / `to_f(...)` -> `write_to_file(...)`
+- `append_file(...)` / `append_f(...)` -> `append_to_file(...)`
+- `ls(...)` -> `list_files(...)`
+- `exists(...)` -> `test_filepath_exists(...)`
 
 ## Examples
 
@@ -96,13 +109,11 @@ import os
 import v_scr
 
 target := os.join_path(os.vtmp_dir(), 'v_scr-demo.txt')
-write_release_note := v_scr.new_pipeline(
-    v_scr.echo('release: demo-app\n'),
-    v_scr.write_to_file(target),
-)
-
 result := v_scr.new_list(
-    v_scr.run_pipeline(write_release_note),
+    v_scr.pipe(
+        v_scr.echo('release: demo-app\n'),
+        v_scr.to_f(target),
+    ),
     v_scr.echo('written to ${target}\n'),
 ).exec()!
 ```

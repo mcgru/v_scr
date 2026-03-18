@@ -31,6 +31,14 @@ pub fn cat_stdin() Step {
     }
 }
 
+pub fn from_file(path string) Step {
+    return cat_file(path)
+}
+
+pub fn from_f(path string) Step {
+    return cat_file(path)
+}
+
 pub fn which(cmd string) Step {
     return fn [cmd] (mut pipe Pipe) ! {
         expanded := expand(cmd, pipe)
@@ -53,4 +61,8 @@ pub fn list_files(path string) Step {
         pipe.stdout = files.join('\n').bytes()
         pipe.status = 0
     }
+}
+
+pub fn ls(path string) Step {
+    return list_files(path)
 }

@@ -27,6 +27,14 @@ pub fn write_to_file(path string) Step {
     }
 }
 
+pub fn to_file(path string) Step {
+    return write_to_file(path)
+}
+
+pub fn to_f(path string) Step {
+    return write_to_file(path)
+}
+
 pub fn append_to_file(path string) Step {
     return fn [path] (mut pipe Pipe) ! {
         expanded := expand(path, pipe)
@@ -34,6 +42,14 @@ pub fn append_to_file(path string) Step {
         os.write_file(expanded, existing + active_stream(pipe).bytestr())!
         pipe.status = 0
     }
+}
+
+pub fn append_file(path string) Step {
+    return append_to_file(path)
+}
+
+pub fn append_f(path string) Step {
+    return append_to_file(path)
 }
 
 pub fn return_(status int) Step {
