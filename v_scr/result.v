@@ -21,12 +21,24 @@ pub fn (result RunResult) stderr_string() string {
     return result.stderr.bytestr()
 }
 
+pub fn (result RunResult) stderr_bytes() []u8 {
+    return result.stderr.clone()
+}
+
 pub fn (result RunResult) trimmed_string() string {
     return result.string().trim_space()
 }
 
 pub fn (result RunResult) strings() []string {
     text := result.trimmed_string()
+    if text == '' {
+        return []string{}
+    }
+    return text.split_into_lines()
+}
+
+pub fn (result RunResult) stderr_strings() []string {
+    text := result.stderr_string().trim_space()
     if text == '' {
         return []string{}
     }

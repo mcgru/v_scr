@@ -6,7 +6,7 @@ The goal is to make automation code read closer to Bash while keeping V's explic
 
 ## Status
 
-This repository currently contains a working early implementation:
+This repository currently contains a working `0.1.x`-level MVP:
 
 - core runtime types
 - `Pipeline` and `List`
@@ -14,6 +14,25 @@ This repository currently contains a working early implementation:
 - process execution on top of `os.new_process()`
 - variable expansion for args, locals, and env
 - a first batch of sources, filters, sinks, builtins, and logic helpers
+- runnable examples and tests for process, file, and nested-sequence semantics
+
+## API stability
+
+For `0.1.x`, treat the long names as canonical API:
+
+- `cat_file`, `write_to_file`, `append_to_file`
+- `set_args`, `set_env_var`, `set_local`, `set_cwd`
+- `run_pipeline`, `run_list`
+
+Treat the short names as stable scripting aliases:
+
+- `from_file`, `from_f`, `to_file`, `to_f`, `append_file`, `append_f`
+- `args`, `env`, `local_`, `cd`
+- `pipe`, `group`
+
+The long names optimize for clarity in library code.
+
+The short names optimize for terseness in `.vsh` scripts and shell-like automation snippets.
 
 ## Sequence model
 
@@ -135,12 +154,30 @@ result := v_scr.new_list(
 ).exec()!
 ```
 
-See the runnable examples in `examples/basic_pipeline.v`, `examples/bash_to_vscr.v`, `examples/deploy.vsh`, and `examples/list_vs_pipeline.v`.
+### Reusable sequences with `call()` and `invoke()`
+
+```v
+import v_scr
+
+greeter := v_scr.new_list(
+    v_scr.local_('name', '\$1'),
+    v_scr.echo('hello, \$name'),
+)
+
+direct := greeter.call('direct')!
+nested := v_scr.new_list(
+    v_scr.echo('before|'),
+    greeter.invoke('nested'),
+    v_scr.echo('|after'),
+).exec()!
+```
+
+See the runnable examples in `examples/basic_pipeline.v`, `examples/bash_to_vscr.v`, `examples/deploy.vsh`, `examples/list_vs_pipeline.v`, and `examples/call_and_invoke.v`.
 
 ## Next steps
 
-- expand file and process integration coverage
-- add more shell-like filters and convenience helpers
-- refine sequence semantics and release the first `0.1.x` package
+- broaden integration coverage on more platforms
+- add more shell-like filters and convenience helpers where they clearly improve readability
+- prepare packaging and VPM-facing release polish
 
 See `project.md` for the project plan.
