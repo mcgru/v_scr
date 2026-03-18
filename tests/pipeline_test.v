@@ -77,6 +77,15 @@ fn test_grep_r_and_sort() {
     assert result.trimmed_string() == 'alpha\natom'
 }
 
+fn test_list_accumulates_stdout() {
+    result := v_scr.new_list(
+        v_scr.echo('alpha'),
+        v_scr.echo('beta'),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'alphabeta'
+}
+
 fn test_sequence_call_uses_positional_args() {
     seq := v_scr.new_list(
         v_scr.echo_args(),
@@ -88,7 +97,7 @@ fn test_sequence_call_uses_positional_args() {
 
 fn test_invoke_overrides_args_temporarily() {
     inner := v_scr.new_list(
-        v_scr.echo_args(),
+        v_scr.set_local('inner_seen', '\$1 \$2'),
     )
     result := v_scr.new_list(
         v_scr.set_args('outer'),
@@ -107,14 +116,17 @@ fn test_and_or_semantics() {
     success := v_scr.new_list(
         v_scr.echo('success'),
     )
-    missing := os.join_path(os.vtmp_dir(), 'v_scr_missing_path_for_or')
+    failing_probe := v_scr.new_pipeline(
+        v_scr.echo('x'),
+        v_scr.test_empty(),
+    )
     result := v_scr.new_list(
-        v_scr.test_filepath_exists(missing),
+        v_scr.run_pipeline(failing_probe),
         v_scr.or_(fallback),
         v_scr.and_(success),
     ).exec() or { panic(err) }
 
-    assert result.trimmed_string() == 'success'
+    assert result.trimmed_string() == 'fallbacksuccess'
     assert result.status_code() == 0
 }
 
@@ -141,5 +153,35 @@ fn test_if_and_if_else_semantics() {
     }
 
     os.rmdir_all(base) or {}
-    assert result.trimmed_string() == 'missing'
+    assert result.trimmed_string() == 'existsmissing'
+}
+
+fn test_invoke_return_stops_only_inner_sequence() {
+    inner := v_scr.new_list(
+        v_scr.echo('inner'),
+        v_scr.return_(3),
+        v_scr.echo('after-return'),
+    )
+    result := v_scr.new_list(
+        inner.invoke(),
+        v_scr.echo('outer'),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'innerouter'
+    assert result.status_code() == 0
+}
+
+fn test_invoke_exit_stops_outer_sequence() {
+    inner := v_scr.new_list(
+        v_scr.echo('inner'),
+        v_scr.exit_(9),
+        v_scr.echo('after-exit'),
+    )
+    result := v_scr.new_list(
+        inner.invoke(),
+        v_scr.echo('outer'),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'inner'
+    assert result.status_code() == 9
 }

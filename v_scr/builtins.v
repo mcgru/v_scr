@@ -58,12 +58,12 @@ pub fn test_filepath_exists(path string) Step {
 
 pub fn test_empty() Step {
     return fn (mut pipe Pipe) ! {
-        pipe.status = if pipe.stdin.len == 0 { 0 } else { 1 }
+        pipe.status = if active_stream(pipe).len == 0 { 0 } else { 1 }
     }
 }
 
 pub fn test_not_empty() Step {
     return fn (mut pipe Pipe) ! {
-        pipe.status = if pipe.stdin.len > 0 { 0 } else { 1 }
+        pipe.status = if active_stream(pipe).len > 0 { 0 } else { 1 }
     }
 }

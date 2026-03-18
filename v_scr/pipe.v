@@ -1,5 +1,11 @@
 module v_scr
 
+enum StopKind {
+    none
+    return_only
+    exit_all
+}
+
 pub struct Pipe {
 pub mut:
     stdin  []u8
@@ -12,6 +18,7 @@ pub mut:
     locals map[string]string
     trace  bool
     stopped bool
+    stop_kind StopKind
 }
 
 pub fn new_pipe() Pipe {
@@ -21,6 +28,7 @@ pub fn new_pipe() Pipe {
         args: []string{}
         locals: map[string]string{}
         stopped: false
+        stop_kind: .none
     }
 }
 
@@ -44,6 +52,7 @@ fn (p Pipe) snapshot() Pipe {
         locals: p.locals.clone()
         trace: p.trace
         stopped: p.stopped
+        stop_kind: p.stop_kind
     }
 }
 
@@ -51,4 +60,11 @@ fn apply_result(mut pipe Pipe, result RunResult) {
     pipe.stdout = result.stdout.clone()
     pipe.stderr = result.stderr.clone()
     pipe.status = result.status
+}
+
+fn active_stream(pipe Pipe) []u8 {
+    if pipe.stdout.len > 0 {
+        return pipe.stdout.clone()
+    }
+    return pipe.stdin.clone()
 }

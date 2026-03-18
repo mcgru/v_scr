@@ -44,8 +44,9 @@ fn run_process(mut pipe Pipe, cmd string, args []string) ! {
         eprintln('v_scr exec: ${expanded_cmd} ${expanded_args.join(" ")}')
     }
     process.run()
-    if pipe.stdin.len > 0 {
-        process.stdin_write(pipe.stdin.bytestr())
+    input_data := active_stream(pipe)
+    if input_data.len > 0 {
+        process.stdin_write(input_data.bytestr())
     }
     close_process_stdin(mut process)
     process.wait()
