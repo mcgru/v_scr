@@ -1,0 +1,4 @@
+interface:
+  display_name: "v_scr Builder"
+  short_description: "Build the v_scr V shell-like DSL"
+  default_prompt: "Use $v-scr-builder to design or implement the v_scr shell-like scripting library in V."
