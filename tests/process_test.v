@@ -40,7 +40,7 @@ fn test_set_cwd_affects_process() {
     }
     target := '/tmp'
     result := v_scr.new_list(
-        v_scr.set_cwd(target),
+        v_scr.cd(target),
         v_scr.sh('pwd'),
     ).exec() or { panic(err) }
 

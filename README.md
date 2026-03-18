@@ -65,13 +65,29 @@ For nested orchestration helpers:
 - `pipe(...)` is shorthand for `run_pipeline(new_pipeline(...))`
 - `group(...)` is shorthand for `run_list(new_list(...))`
 
-For frequent file operations there are short aliases too:
+Short aliases for files, context, and tests are listed in the cheatsheet below.
 
-- `from_file(...)` / `from_f(...)` -> `cat_file(...)`
-- `to_file(...)` / `to_f(...)` -> `write_to_file(...)`
-- `append_file(...)` / `append_f(...)` -> `append_to_file(...)`
-- `ls(...)` -> `list_files(...)`
-- `exists(...)` -> `test_filepath_exists(...)`
+## API cheatsheet
+
+Use the long names when you want maximum explicitness in library code.
+
+Use the short names when you are writing shell-like scripts and the intent is already obvious from context.
+
+| Long name | Short name | Typical use |
+| --- | --- | --- |
+| `cat_file(path)` | `from_file(path)`, `from_f(path)` | Read a file into a pipeline |
+| `write_to_file(path)` | `to_file(path)`, `to_f(path)` | Final sink in a pipeline |
+| `append_to_file(path)` | `append_file(path)`, `append_f(path)` | Append pipeline output to a file |
+| `list_files(path)` | `ls(path)` | Small shell-like directory listing |
+| `test_filepath_exists(path)` | `exists(path)` | Guard/check before branching |
+| `set_args(...)` | `args(...)` | Positional args for a sequence |
+| `set_env_var(name, value)` | `env(name, value)` | Environment setup before `exec()` / `sh()` |
+| `set_local(name, value)` | `local_(name, value)` | Local shell-like variables |
+| `set_cwd(path)` | `cd(path)` | Change working directory for later steps |
+| `test_empty()` | `empty()` | Assert/check empty active stream |
+| `test_not_empty()` | `non_empty()` | Assert/check non-empty active stream |
+| `run_pipeline(new_pipeline(...))` | `pipe(...)` | Inline nested pipeline |
+| `run_list(new_list(...))` | `group(...)` | Inline nested list/orchestration |
 
 ## Examples
 
@@ -95,7 +111,7 @@ assert result.trimmed_string() == '3'
 import v_scr
 
 result := v_scr.new_list(
-    v_scr.set_env_var('APP_NAME', 'demo-app'),
+    v_scr.env('APP_NAME', 'demo-app'),
     v_scr.sh('printf "deploying %s\n" "\$APP_NAME"'),
 ).exec()!
 
@@ -110,6 +126,7 @@ import v_scr
 
 target := os.join_path(os.vtmp_dir(), 'v_scr-demo.txt')
 result := v_scr.new_list(
+    v_scr.cd(os.vtmp_dir()),
     v_scr.pipe(
         v_scr.echo('release: demo-app\n'),
         v_scr.to_f(target),

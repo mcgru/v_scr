@@ -66,8 +66,16 @@ pub fn test_empty() Step {
     }
 }
 
+pub fn empty() Step {
+    return test_empty()
+}
+
 pub fn test_not_empty() Step {
     return fn (mut pipe Pipe) ! {
         pipe.status = if active_stream(pipe).len > 0 { 0 } else { 1 }
     }
+}
+
+pub fn non_empty() Step {
+    return test_not_empty()
 }

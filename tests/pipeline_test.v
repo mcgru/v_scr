@@ -46,9 +46,9 @@ fn test_nested_run_pipeline_keeps_context() {
 
 fn test_expand_args_and_indirect_reference() {
     result := v_scr.new_list(
-        v_scr.set_args('one', 'two'),
-        v_scr.set_local('ref', 'TARGET'),
-        v_scr.set_env_var('TARGET', 'value'),
+        v_scr.args('one', 'two'),
+        v_scr.local_('ref', 'TARGET'),
+        v_scr.env('TARGET', 'value'),
         v_scr.echo('\$1 \$2 \$# \${!ref}'),
     ).exec() or { panic(err) }
 
@@ -115,6 +115,29 @@ fn test_sequence_call_uses_positional_args() {
     result := seq.call('alpha', 'beta') or { panic(err) }
 
     assert result.trimmed_string() == 'alpha beta'
+}
+
+fn test_short_aliases_for_context_and_empty_checks() {
+    non_empty_result := v_scr.new_pipeline(
+        v_scr.echo('payload'),
+        v_scr.non_empty(),
+    ).exec() or { panic(err) }
+
+    empty_result := v_scr.new_pipeline(
+        v_scr.echo(''),
+        v_scr.empty(),
+    ).exec() or { panic(err) }
+
+    env_result := v_scr.new_list(
+        v_scr.args('outer'),
+        v_scr.local_('name', 'demo'),
+        v_scr.env('TARGET', 'value'),
+        v_scr.echo('\$1 \$name \$TARGET'),
+    ).exec() or { panic(err) }
+
+    assert non_empty_result.okay()
+    assert empty_result.okay()
+    assert env_result.trimmed_string() == 'outer demo value'
 }
 
 fn test_invoke_overrides_args_temporarily() {

@@ -77,11 +77,19 @@ pub fn set_args(args ...string) Step {
     }
 }
 
+pub fn args(args ...string) Step {
+    return set_args(...args)
+}
+
 pub fn set_env_var(name string, value string) Step {
     return fn [name, value] (mut pipe Pipe) ! {
         pipe.env[name] = expand(value, pipe)
         pipe.status = 0
     }
+}
+
+pub fn env(name string, value string) Step {
+    return set_env_var(name, value)
 }
 
 pub fn unset_env_var(name string) Step {
@@ -98,6 +106,10 @@ pub fn set_local(name string, value string) Step {
     }
 }
 
+pub fn local_(name string, value string) Step {
+    return set_local(name, value)
+}
+
 pub fn unset_local(name string) Step {
     return fn [name] (mut pipe Pipe) ! {
         pipe.locals.delete(name)
@@ -110,6 +122,10 @@ pub fn set_cwd(path string) Step {
         pipe.cwd = expand(path, pipe)
         pipe.status = 0
     }
+}
+
+pub fn cd(path string) Step {
+    return set_cwd(path)
 }
 
 pub fn set_trace(enabled bool) Step {
