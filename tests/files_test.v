@@ -105,8 +105,8 @@ fn test_file_aliases() {
     os.rmdir_all(base) or {}
 }
 
-fn test_grep_r_with_files() {
-    base := os.join_path(os.vtmp_dir(), 'v_scr_grep_r_files_test')
+fn test_grep_p_with_files() {
+    base := os.join_path(os.vtmp_dir(), 'v_scr_grep_p_files_test')
     a_path := os.join_path(base, 'a.txt')
     b_path := os.join_path(base, 'b.txt')
     os.rmdir_all(base) or {}
@@ -121,7 +121,7 @@ fn test_grep_r_with_files() {
     }
 
     result := v_scr.new_list(
-        v_scr.grep_r('-in', '^warn', a_path, b_path) or { panic(err) },
+        v_scr.grep_p('-in', '^warn', a_path, b_path) or { panic(err) },
     ).exec() or {
         os.rmdir_all(base) or {}
         panic(err)

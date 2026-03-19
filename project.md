@@ -200,7 +200,8 @@ pub struct List {}
 
 - `grep(pattern string) !Step`
 - `grep_v(pattern string) !Step`
-- `grep_r(args ...string) !Step`
+- `grep_r(pattern string) !Step`
+- `grep_p(args ...string) !Step`
 - `sed(args ...string) !Step`
 - `head(n int) Step`
 - `tail(n int) Step`
@@ -537,7 +538,7 @@ v_scr/
 1. Подготовить packaging/VPM-facing polish.
 2. При желании сделать отдельный release checklist.
 3. Расширить cross-platform coverage.
-4. Решить, нужны ли еще shell-like variadic wrappers кроме уже добавленных `sed(...)` и `grep_r(...)`.
+4. Решить, нужны ли еще shell-like variadic wrappers кроме уже добавленных `sed(...)` и `grep_p(...)`.
 5. Заменить экранированные `\$...` в примерах на raw strings там, где это улучшает читаемость.
 
 ## Canonical API

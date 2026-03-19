@@ -77,8 +77,8 @@ fn test_grep_r_and_sort() {
     assert result.trimmed_string() == 'alpha\natom'
 }
 
-fn test_grep_r_flags_on_stdin() {
-    step := v_scr.grep_r('-in', '^warn') or { panic(err) }
+fn test_grep_p_flags_on_stdin() {
+    step := v_scr.grep_p('-in', '^warn') or { panic(err) }
     result := v_scr.new_pipeline(
         v_scr.echo('info\nWarning\nwarn-now\n'),
         step,
@@ -87,14 +87,14 @@ fn test_grep_r_flags_on_stdin() {
     assert result.trimmed_string() == '2:Warning\n3:warn-now'
 }
 
-fn test_grep_r_count_and_quiet_on_stdin() {
-    count_step := v_scr.grep_r('-c', 'a') or { panic(err) }
+fn test_grep_p_count_and_quiet_on_stdin() {
+    count_step := v_scr.grep_p('-c', 'a') or { panic(err) }
     count_result := v_scr.new_pipeline(
         v_scr.echo('alpha\nbeta\ngamma\n'),
         count_step,
     ).exec() or { panic(err) }
 
-    quiet_step := v_scr.grep_r('-q', '^zzz') or { panic(err) }
+    quiet_step := v_scr.grep_p('-q', '^zzz') or { panic(err) }
     quiet_result := v_scr.new_pipeline(
         v_scr.echo('alpha\nbeta\ngamma\n'),
         quiet_step,

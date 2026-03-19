@@ -100,6 +100,8 @@ Use the short names when you are writing shell-like scripts and the intent is al
 
 | Long name | Short name | Typical use |
 | --- | --- | --- |
+| `grep_r(pattern)` | - | Lightweight regex filter over the current stream |
+| `grep_p(args...)` | - | Shell-like PCRE grep with flags and optional files |
 | `cat_file(path)` | `from_file(path)`, `from_f(path)` | Read a file into a pipeline |
 | `write_to_file(path)` | `to_file(path)`, `to_f(path)` | Final sink in a pipeline |
 | `append_to_file(path)` | `append_file(path)`, `append_f(path)` | Append pipeline output to a file |
@@ -123,11 +125,30 @@ import v_scr
 
 result := v_scr.new_pipeline(
     v_scr.echo('alpha\nbeta\ngamma\n'),
-    v_scr.grep('a')!,
+    v_scr.grep_r('^a.*')!,
     v_scr.count_lines(),
 ).exec()!
 
-assert result.trimmed_string() == '3'
+assert result.trimmed_string() == '2'
+```
+
+### Regex filters: `grep_r` vs `grep_p`
+
+Use `grep_r(pattern)` for the simple typed regex filter over the current stream.
+
+Use `grep_p(args...)` when you want shell-like flags such as `-i`, `-n`, `-c`, `-q`, or when you want to match against files directly.
+
+```v
+import v_scr
+
+stream_result := v_scr.new_pipeline(
+    v_scr.echo('warn\nWarning\n'),
+    v_scr.grep_r('^warn')!,
+).exec()!
+
+pcre_result := v_scr.new_list(
+    v_scr.grep_p('-in', '^warn', 'app.log')!,
+).exec()!
 ```
 
 ### List for orchestration
