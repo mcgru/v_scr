@@ -16,6 +16,12 @@ This repository currently contains a working `0.1.x`-level MVP:
 - a first batch of sources, filters, sinks, builtins, and logic helpers
 - runnable examples and tests for process, file, and nested-sequence semantics
 
+## Packaging notes
+
+The package is already structured as a normal V module with `v.mod`, runnable examples, and tests.
+
+The next release-facing step is packaging polish for VPM publication, not core runtime work.
+
 ## API stability
 
 For `0.1.x`, treat the long names as canonical API:

@@ -2,6 +2,37 @@
 
 План создания библиотеки на V (`v0.5.1+`), которая помогает писать код, близкий по духу к Bash, но остается типизированной библиотекой V, а не интерпретатором shell.
 
+## Текущее состояние
+
+На `2026-03-19` проект находится в состоянии рабочего `0.1.x` MVP.
+
+Уже реализовано:
+
+- ядро `Pipe` / `RunResult` / `Pipeline` / `List`;
+- process runtime на `os.new_process()`;
+- shell-like expansion для `args`, `locals`, `env`;
+- nested orchestration через `run_pipeline`, `run_list`, `pipe`, `group`, `call`, `invoke`;
+- разделение `return_` и `exit_` semantics для вложенных sequence;
+- базовые `sources`, `filters`, `sinks`, `builtins`, `logic`;
+- short aliases для shell-like ergonomics;
+- runnable examples и тесты для process/file/nested scenarios.
+
+Проверено:
+
+- `v test /home/margo/dev/try/tests` -> `3 passed, 3 total`;
+- `v -check` для всех примеров из `examples/` проходит.
+
+## Статус по этапам
+
+- Этап 1. Спека: выполнен
+- Этап 2. Ядро runtime: выполнен
+- Этап 3. Process engine: выполнен
+- Этап 4. MVP-команды: выполнен для `0.1.x`
+- Этап 5. Композиция и логика: выполнен
+- Этап 6. Expansion: выполнен для заявленного минимального scope
+- Этап 7. Документация и примеры: выполнен для `0.1.x`
+- Этап 8. Тесты и релиз: тестовая часть выполнена; packaging/VPM polish остается следующим шагом
+
 ## Roles
 
 Ты - профессионал senior в написании кода на Vlang, на golang, в bash ты профессионал и пишешь, активно используя башизмы.
@@ -156,9 +187,12 @@ pub struct List {}
 - `echo(input string) Step`
 - `echo_args() Step`
 - `cat_file(path string) Step`
+- `from_file(path string) Step`
+- `from_f(path string) Step`
 - `cat_stdin() Step`
 - `which(cmd string) Step`
 - `list_files(path string) Step`
+- `ls(path string) Step`
 - `exec(cmd string, args ...string) Step`
 - `sh(line string) Step`
 
@@ -166,8 +200,8 @@ pub struct List {}
 
 - `grep(pattern string) !Step`
 - `grep_v(pattern string) !Step`
-- `grep_r(pattern string) !Step` (для regexp-выражений, как в `grep -P`, можно grep_p, примени сразу хорошую библиотеку regexp из vlang stdlib)
-- `sed(string) !Step` (аналог sed из linux, на первых порах можно вызывать sed через os.execute, пока не реализовывай сам sed )
+- `grep_r(args ...string) !Step`
+- `sed(args ...string) !Step`
 - `head(n int) Step`
 - `tail(n int) Step`
 - `count_lines() Step`
@@ -186,7 +220,11 @@ pub struct List {}
 - `to_stdout() Step`
 - `to_stderr() Step`
 - `write_to_file(path string) Step`
+- `to_file(path string) Step`
+- `to_f(path string) Step`
 - `append_to_file(path string) Step`
+- `append_file(path string) Step`
+- `append_f(path string) Step`
 - `return_(status int) Step`
 - `exit_(status int) Step`
 
@@ -198,8 +236,11 @@ pub struct List {}
 - `touch(path string) Step`
 - `chmod(path string, mode u32) Step`
 - `test_filepath_exists(path string) Step`
+- `exists(path string) Step`
 - `test_empty() Step`
+- `empty() Step`
 - `test_not_empty() Step`
+- `non_empty() Step`
 
 ### Логика
 
@@ -209,6 +250,26 @@ pub struct List {}
 - `if_else(expr Step, body SequenceLike, else_body SequenceLike) Step`
 - `run_pipeline(pl Pipeline) Step`
 - `run_list(ls List) Step`
+- `pipe(steps ...Step) Step`
+- `group(steps ...Step) Step`
+
+### Контекст и ergonomics
+
+- `set_args(args ...string) Step`
+- `args(args ...string) Step`
+- `set_env_var(name string, value string) Step`
+- `env(name string, value string) Step`
+- `unset_env_var(name string) Step`
+- `set_local(name string, value string) Step`
+- `local_(name string, value string) Step`
+- `unset_local(name string) Step`
+- `set_cwd(path string) Step`
+- `cd(path string) Step`
+- `set_trace(enabled bool) Step`
+- `(pipeline Pipeline).call(args ...string) !RunResult`
+- `(list List).call(args ...string) !RunResult`
+- `(pipeline Pipeline).invoke(args ...string) Step`
+- `(list List).invoke(args ...string) Step`
 
 ## Важное архитектурное решение
 
@@ -265,10 +326,13 @@ v_scr/
 ├── v.mod
 ├── README.md
 ├── project.md
+├── chat.log.txt
 ├── examples/
 │   ├── basic_pipeline.v
 │   ├── bash_to_vscr.v
-│   └── deploy.vsh
+│   ├── deploy.vsh
+│   ├── list_vs_pipeline.v
+│   └── call_and_invoke.v
 ├── v_scr/
 │   ├── pipe.v
 │   ├── result.v
@@ -284,9 +348,8 @@ v_scr/
 │   └── logic.v
 └── tests/
     ├── pipeline_test.v
-    ├── filters_test.v
     ├── process_test.v
-    └── expansion_test.v
+    └── files_test.v
 ```
 
 ## План реализации
@@ -411,17 +474,20 @@ v_scr/
 - CI на Linux/macOS/Windows;
 - публикацию в VPM.
 
-## MVP 0.1.0
+## MVP 0.1.x
 
-В первый релиз разумно включить только:
+В текущий `0.1.x` уже включено:
 
 - core runtime;
 - `Pipeline` и `List`;
 - process engine;
-- 12-15 базовых шагов;
+- базовые steps и aliases;
 - capture methods;
 - env/args expansion;
-- `and_` / `or_`.
+- `and_` / `or_` / `if_` / `if_else`;
+- nested sequence ergonomics через `call` / `invoke`;
+- runnable examples;
+- тесты на process/file/nested semantics.
 
 Оставить на потом:
 
@@ -430,6 +496,7 @@ v_scr/
 - асинхронные streaming pipelines;
 - job control;
 - полную bash-совместимость quoting/globbing.
+- shell-like variadic API для `grep(...)`, если это еще будет нужно.
 
 ## Основные риски
 
@@ -467,13 +534,26 @@ v_scr/
 
 ## Следующие практические шаги
 
-1. Создать каркас репозитория и `v.mod`.
-2. Зафиксировать публичный API до написания реализации.
-3. Реализовать ядро `Pipe` / `Pipeline` / `List`.
-4. Поднять process engine через `os.new_process()`.
-5. Собрать MVP-команды.
-6. Написать примеры "из Bash в V".
-7. Закрыть тестами критические сценарии.
+1. Подготовить packaging/VPM-facing polish.
+2. При желании сделать отдельный release checklist.
+3. Расширить cross-platform coverage.
+4. Решить, нужны ли еще shell-like variadic wrappers кроме уже добавленных `sed(...)` и `grep_r(...)`.
+5. Заменить экранированные `\$...` в примерах на raw strings там, где это улучшает читаемость.
+
+## Canonical API
+
+Для `0.1.x` long names считаются canonical API:
+
+- `cat_file`, `write_to_file`, `append_to_file`;
+- `set_args`, `set_env_var`, `set_local`, `set_cwd`;
+- `run_pipeline`, `run_list`.
+
+Short names считаются stable scripting aliases:
+
+- `from_file`, `from_f`, `to_file`, `to_f`, `append_file`, `append_f`;
+- `args`, `env`, `local_`, `cd`;
+- `pipe`, `group`;
+- `exists`, `empty`, `non_empty`.
 
 ## Источники
 
