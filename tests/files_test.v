@@ -49,11 +49,11 @@ fn test_cat_stdout_stderr_and_rm_helpers() {
         v_scr.mkdir(subdir, 0o755),
         v_scr.pipe(
             v_scr.echo('alpha'),
-            v_scr.stdout(file_path, false),
+            v_scr.stdout(file_path),
         ),
         v_scr.pipe(
             v_scr.echo('beta'),
-            v_scr.stderr(err_path, false),
+            v_scr.stderr(err_path),
         ),
         v_scr.pipe(
             v_scr.cat(file_path),
@@ -76,6 +76,65 @@ fn test_cat_stdout_stderr_and_rm_helpers() {
         v_scr.rmdir('-r', base),
     ).exec() or { panic(err) }
     assert cleanup.okay()
+}
+
+fn test_stdout_a_and_stderr_a_append() {
+    base := os.join_path(os.vtmp_dir(), 'v_scr_sink_append_test')
+    out_path := os.join_path(base, 'out.txt')
+    err_path := os.join_path(base, 'err.txt')
+    os.rmdir_all(base) or {}
+
+    result := v_scr.new_list(
+        v_scr.mkdir(base, 0o755),
+        v_scr.pipe(
+            v_scr.echo('one'),
+            v_scr.stdout(out_path),
+        ),
+        v_scr.pipe(
+            v_scr.echo('two'),
+            v_scr.stdout_a(out_path),
+        ),
+        v_scr.pipe(
+            v_scr.echo('err1'),
+            v_scr.stderr(err_path),
+        ),
+        v_scr.pipe(
+            v_scr.echo('err2'),
+            v_scr.stderr_a(err_path),
+        ),
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.status_code() == 0
+    assert os.read_file(out_path) or { '' } == 'onetwo'
+    assert os.read_file(err_path) or { '' } == 'err1err2'
+    os.rmdir_all(base) or {}
+}
+
+fn test_stdout_and_stderr_devnull_and_cross_stream_redirect() {
+    result := v_scr.new_list(
+        v_scr.pipe(
+            v_scr.echo('left'),
+            v_scr.stdout(os.path_devnull),
+        ),
+        v_scr.pipe(
+            v_scr.echo('right'),
+            v_scr.stderr(os.stdout()),
+        ),
+        v_scr.pipe(
+            v_scr.echo('warn'),
+            v_scr.stdout(os.stderr()),
+        ),
+        v_scr.pipe(
+            v_scr.echo('drop'),
+            v_scr.stderr(os.path_devnull),
+        ),
+    ).exec() or { panic(err) }
+
+    assert result.string() == 'right'
+    assert result.stderr_string() == 'warn'
 }
 
 fn test_touch_and_test_filepath_exists() {

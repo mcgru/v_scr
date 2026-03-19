@@ -263,7 +263,13 @@
 <li class="open"><a href="#stderr">fn stderr</a>        <ul>
 </ul>
 </li>
+<li class="open"><a href="#stderr_a">fn stderr_a</a>        <ul>
+</ul>
+</li>
 <li class="open"><a href="#stdout">fn stdout</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#stdout_a">fn stdout_a</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#strip_extension">fn strip_extension</a>        <ul>
@@ -1177,8 +1183,8 @@
 		<section id="stderr" class="doc-node">
 			<div class="title"><h2>fn stderr <a href="#stderr">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">stderr</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span>OutputArg<span class="token punctuation">)</span> Step</code></pre>
-<p>stderr creates a step that prints the active stream to stderr, or writes/appends it to a file while retaining stderr capture.</p>
+<code><span class="token keyword">fn</span> <span class="token function">stderr</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span>OutputTarget<span class="token punctuation">)</span> Step</code></pre>
+<p>stderr creates a step that prints the active stream to stderr, overwrites a file, discards to <code>/dev/null</code>, or redirects to stdout when passed <code>os.stdout()</code>.</p>
 
 <section class="doc-node examples"><h4>Example</h4>
 <pre>
@@ -1186,15 +1192,39 @@
 </section>
 </section>
 
-		<section id="stdout" class="doc-node">
-			<div class="title"><h2>fn stdout <a href="#stdout">#</a></h2></div>
+		<section id="stderr_a" class="doc-node">
+			<div class="title"><h2>fn stderr_a <a href="#stderr_a">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">stdout</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span>OutputArg<span class="token punctuation">)</span> Step</code></pre>
-<p>stdout creates a step that prints the active stream, or writes/appends it to a file.</p>
+<code><span class="token keyword">fn</span> <span class="token function">stderr_a</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>stderr_a creates a step that appends the active stream to a file while retaining stderr capture.</p>
 
 <section class="doc-node examples"><h4>Example</h4>
 <pre>
-<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">stdout</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span></code></pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">stderr_a</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.err'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="stdout" class="doc-node">
+			<div class="title"><h2>fn stdout <a href="#stdout">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">stdout</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span>OutputTarget<span class="token punctuation">)</span> Step</code></pre>
+<p>stdout creates a step that prints the active stream, overwrites a file, discards to <code>/dev/null</code>, or redirects to stderr when passed <code>os.stderr()</code>.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">stdout</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="stdout_a" class="doc-node">
+			<div class="title"><h2>fn stdout_a <a href="#stdout_a">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">stdout_a</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>stdout_a creates a step that appends the active stream to a file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">stdout_a</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
 </section>
 </section>
 
@@ -1742,7 +1772,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 19 Mar 2026 04:51:09</div>
+						<div class="footer">Powered by vdoc. Generated on: 19 Mar 2026 05:06:51</div>
 					</div>
 					
 				</div>

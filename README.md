@@ -109,8 +109,10 @@ Use the short names when you are writing shell-like scripts and the intent is al
 | `grep_p_v(args...)` | - | Inverted shell-like PCRE grep |
 | `cat(args...)` | `cat_file(path)`, `cat_stdin()`, `from_file(path)`, `from_f(path)` | Read a file, or pass stdin through when called without args |
 | `write_to_file(path)` | `to_file(path)`, `to_f(path)` | Final sink in a pipeline |
-| `stdout(args...)` | `to_stdout()` | Print the active stream, or write/append it to a file |
-| `stderr(args...)` | `to_stderr()` | Print the active stream to stderr, or write/append it to a file |
+| `stdout(args...)` | `to_stdout()` | Print the active stream, overwrite a file, discard to `os.path_devnull`, or redirect to `os.stderr()` |
+| `stdout_a(path)` | - | Append the active stream to a file |
+| `stderr(args...)` | `to_stderr()` | Print the active stream to stderr, overwrite a file, discard to `os.path_devnull`, or redirect to `os.stdout()` |
+| `stderr_a(path)` | - | Append the active stream to a file while keeping stderr semantics |
 | `append_to_file(path)` | `append_file(path)`, `append_f(path)` | Append pipeline output to a file |
 | `list_files(args...)` | `ls(args...)` | Small shell-like directory listing |
 | `ls_l(args...)` | - | Long-format directory listing via `ls -l` |
@@ -197,11 +199,19 @@ result := v_scr.new_list(
     v_scr.cd(os.vtmp_dir()),
     v_scr.pipe(
         v_scr.echo('release: demo-app\n'),
-        v_scr.stdout(target, false),
+        v_scr.stdout(target),
     ),
     v_scr.echo('written to ${target}\n'),
 ).exec()!
 ```
+
+### Stream redirection targets
+
+`stdout(os.stderr())` redirects the active stream into the stderr channel.
+
+`stderr(os.stdout())` merges the active stream into stdout.
+
+`stdout(os.path_devnull)` and `stderr(os.path_devnull)` discard output.
 
 ### `head()` and `tail()` with negative values
 

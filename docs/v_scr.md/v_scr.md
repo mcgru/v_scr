@@ -70,7 +70,9 @@
 - [sh](#sh)
 - [sort](#sort)
 - [stderr](#stderr)
+- [stderr_a](#stderr_a)
 - [stdout](#stdout)
+- [stdout_a](#stdout_a)
 - [strip_extension](#strip_extension)
 - [swap_extensions](#swap_extensions)
 - [tail](#tail)
@@ -1189,10 +1191,10 @@ _ := v_scr.sort()
 
 ## stderr
 ```v
-fn stderr(args ...OutputArg) Step
+fn stderr(args ...OutputTarget) Step
 ```
 
-stderr creates a step that prints the active stream to stderr, or writes/appends it to a file while retaining stderr capture.
+stderr creates a step that prints the active stream to stderr, overwrites a file, discards to `/dev/null`, or redirects to stdout when passed `os.stdout()`.
 
 Example
 ```v
@@ -1203,17 +1205,49 @@ _ := v_scr.stderr('/tmp/demo.err')
 
 [[Return to contents]](#Contents)
 
-## stdout
+## stderr_a
 ```v
-fn stdout(args ...OutputArg) Step
+fn stderr_a(path string) Step
 ```
 
-stdout creates a step that prints the active stream, or writes/appends it to a file.
+stderr_a creates a step that appends the active stream to a file while retaining stderr capture.
 
 Example
 ```v
 
-_ := v_scr.stdout('/tmp/demo.txt', false)
+_ := v_scr.stderr_a('/tmp/demo.err')
+
+```
+
+[[Return to contents]](#Contents)
+
+## stdout
+```v
+fn stdout(args ...OutputTarget) Step
+```
+
+stdout creates a step that prints the active stream, overwrites a file, discards to `/dev/null`, or redirects to stderr when passed `os.stderr()`.
+
+Example
+```v
+
+_ := v_scr.stdout('/tmp/demo.txt')
+
+```
+
+[[Return to contents]](#Contents)
+
+## stdout_a
+```v
+fn stdout_a(path string) Step
+```
+
+stdout_a creates a step that appends the active stream to a file.
+
+Example
+```v
+
+_ := v_scr.stdout_a('/tmp/demo.txt')
 
 ```
 
@@ -1934,4 +1968,4 @@ result := v_scr.exec_pipeline(v_scr.echo('ok')) or { return }; _ = result.status
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 19 Mar 2026 04:51:09
+#### Powered by vdoc. Generated on: 19 Mar 2026 05:06:51

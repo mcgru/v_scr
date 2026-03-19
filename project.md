@@ -227,8 +227,10 @@ pub struct List {}
 
 ### Sinks
 
-- `stdout(args ...OutputArg) Step`
-- `stderr(args ...OutputArg) Step`
+- `stdout(args ...OutputTarget) Step`
+- `stdout_a(path string) Step`
+- `stderr(args ...OutputTarget) Step`
+- `stderr_a(path string) Step`
 - `to_stdout() Step`
 - `to_stderr() Step`
 - `write_to_file(path string) Step`
