@@ -104,3 +104,31 @@ fn test_file_aliases() {
     assert listing.trimmed_string() == 'aliases.txt'
     os.rmdir_all(base) or {}
 }
+
+fn test_grep_r_with_files() {
+    base := os.join_path(os.vtmp_dir(), 'v_scr_grep_r_files_test')
+    a_path := os.join_path(base, 'a.txt')
+    b_path := os.join_path(base, 'b.txt')
+    os.rmdir_all(base) or {}
+    os.mkdir_all(base) or { panic(err) }
+    os.write_file(a_path, 'warn one\ninfo\n') or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+    os.write_file(b_path, 'WARN two\nok\n') or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    result := v_scr.new_list(
+        v_scr.grep_r('-in', '^warn', a_path, b_path) or { panic(err) },
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.strings().len == 2
+    assert result.strings()[0] == '${a_path}:1:warn one'
+    assert result.strings()[1] == '${b_path}:1:WARN two'
+    os.rmdir_all(base) or {}
+}

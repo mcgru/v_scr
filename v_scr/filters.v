@@ -1,7 +1,18 @@
 module v_scr
 
 import os
-import regex
+import regex.pcre
+
+struct GrepRConfig {
+mut:
+	pattern     string
+	files       []string
+	invert      bool
+	number      bool
+	ignore_case bool
+	count       bool
+	quiet       bool
+}
 
 pub fn trim_whitespace() Step {
     return fn (mut pipe Pipe) ! {
@@ -55,19 +66,74 @@ pub fn grep_v(pattern string) !Step {
     }
 }
 
-pub fn grep_r(pattern string) !Step {
-    mut re := regex.regex_opt(pattern)!
-    return fn [mut re] (mut pipe Pipe) ! {
-        lines := pipe.stdin.bytestr().split_into_lines()
-        mut matched := []string{}
-        for line in lines {
-            if re.matches_string(line) {
-                matched << line
-            }
-        }
-        pipe.stdout = matched.join('\n').bytes()
-        pipe.status = if matched.len > 0 { 0 } else { 1 }
-    }
+pub fn grep_r(args ...string) !Step {
+	values := args.clone()
+	config := parse_grep_r_args(values)!
+	mut pattern := config.pattern
+	if config.ignore_case {
+		pattern = '(?i)${pattern}'
+	}
+	re := pcre.new_regex(pattern, 0)!
+	return fn [config, re] (mut pipe Pipe) ! {
+		mut lines := []string{}
+		mut line_labels := []string{}
+		mut found := false
+		mut matches := []string{}
+		mut match_count := 0
+
+		if config.files.len == 0 {
+			stdin_lines := active_stream(pipe).bytestr().split_into_lines()
+			for idx, line in stdin_lines {
+				lines << line
+				line_labels << format_grep_r_label('', idx + 1, config.number, false)
+			}
+		} else {
+			multi_file := config.files.len > 1
+			for file in config.files {
+				expanded_file := expand(file, pipe)
+				file_lines := os.read_file(expanded_file)!.split_into_lines()
+				for idx, line in file_lines {
+					lines << line
+					line_labels << format_grep_r_label(expanded_file, idx + 1, config.number, multi_file)
+				}
+			}
+		}
+
+		for idx, line in lines {
+			matched := grep_r_line_matches(re, line)
+			include := if config.invert { !matched } else { matched }
+			if !include {
+				continue
+			}
+			found = true
+			match_count++
+			if config.quiet {
+				break
+			}
+			if config.count {
+				continue
+			}
+			label := line_labels[idx]
+			if label == '' {
+				matches << line
+			} else {
+				matches << '${label}${line}'
+			}
+		}
+
+		if config.quiet {
+			pipe.stdout = []u8{}
+			pipe.status = if found { 0 } else { 1 }
+			return
+		}
+		if config.count {
+			pipe.stdout = match_count.str().bytes()
+			pipe.status = if found { 0 } else { 1 }
+			return
+		}
+		pipe.stdout = matches.join('\n').bytes()
+		pipe.status = if found { 0 } else { 1 }
+	}
 }
 
 pub fn sed(args ...string) !Step {
@@ -199,4 +265,69 @@ fn replace_extension(path string, replacement string) string {
     dir_name := os.dir(path)
     new_name := base_name + replacement
     return if dir_name == '.' { new_name } else { os.join_path(dir_name, new_name) }
+}
+
+fn parse_grep_r_args(args []string) !GrepRConfig {
+	if args.len == 0 {
+		return error('grep_r() expects at least a pattern')
+	}
+	mut config := GrepRConfig{
+		files: []string{}
+	}
+	mut pattern_found := false
+	for arg in args {
+		if !pattern_found && is_grep_r_flag(arg) {
+			apply_grep_r_flag(mut config, arg)!
+			continue
+		}
+		if !pattern_found {
+			config.pattern = arg
+			pattern_found = true
+			continue
+		}
+		config.files << arg
+	}
+	if config.pattern == '' {
+		return error('grep_r() expects a pattern')
+	}
+	return config
+}
+
+fn is_grep_r_flag(arg string) bool {
+	return arg.len > 1 && arg[0] == `-`
+}
+
+fn apply_grep_r_flag(mut config GrepRConfig, arg string) ! {
+	if arg == '--' {
+		return error('grep_r(): `--` is not supported yet')
+	}
+	for ch in arg[1..] {
+		match ch {
+			`v` { config.invert = true }
+			`n` { config.number = true }
+			`i` { config.ignore_case = true }
+			`c` { config.count = true }
+			`q` { config.quiet = true }
+			else { return error('grep_r(): unsupported flag `-${ch.ascii_str()}`') }
+		}
+	}
+}
+
+fn format_grep_r_label(file string, line_no int, with_number bool, with_file bool) string {
+	mut parts := []string{}
+	if with_file {
+		parts << file
+	}
+	if with_number {
+		parts << line_no.str()
+	}
+	if parts.len == 0 {
+		return ''
+	}
+	return parts.join(':') + ':'
+}
+
+fn grep_r_line_matches(re pcre.Regex, line string) bool {
+	re.find(line) or { return false }
+	return true
 }
