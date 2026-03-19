@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>v_scr | vdoc</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="stylesheet" href="doc.css" />
+		<link rel="stylesheet" href="normalize.css" />
+		<script src="dark-mode.js"></script>
+	</head>
+
+	<body>
+		<div><a id="skip-to-content-link" href="#main-content">Skip to content</a></div>
+		<div id="page">
+			<header class="doc-nav hidden">
+				<div class="heading-container">
+					<div class="heading">
+						<div class="info">
+							<div class="module">v_scr</div>
+							<div class="toggle-version-container">
+								<span> 272bf4a</span>
+								<div
+									id="dark-mode-toggle"
+									role="switch"
+									aria-checked="false"
+									aria-label="Toggle dark mode"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" class="light-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="dark-icon" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M11.1,12.08C8.77,7.57,10.6,3.6,11.63,2.01C6.27,2.2,1.98,6.59,1.98,12c0,0.14,0.02,0.28,0.02,0.42 C2.62,12.15,3.29,12,4,12c1.66,0,3.18,0.83,4.1,2.15C9.77,14.63,11,16.17,11,18c0,1.52-0.87,2.83-2.12,3.51 c0.98,0.32,2.03,0.5,3.11,0.5c3.5,0,6.58-1.8,8.37-4.52C18,17.72,13.38,16.52,11.1,12.08z"/></g><path d="M7,16l-0.18,0C6.4,14.84,5.3,14,4,14c-1.66,0-3,1.34-3,3s1.34,3,3,3c0.62,0,2.49,0,3,0c1.1,0,2-0.9,2-2 C9,16.9,8.1,16,7,16z"/></g></g></svg>
+
+								</div>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" id="toggle-menu" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+
+						</div>
+						<div id="search">
+							<input type="text" placeholder="Search... (beta)" autocomplete="off" />
+						</div>
+					</div>
+				</div>
+				<nav class="search hidden"></nav>
+				<nav class="content hidden">
+					<ul>
+						<li class="open"><a href="#and_">fn and_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#append_f">fn append_f</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#append_file">fn append_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#append_to_file">fn append_to_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#args">fn args</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#basename">fn basename</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#cat_file">fn cat_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#cat_stdin">fn cat_stdin</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#cd">fn cd</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#chmod">fn chmod</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#count_lines">fn count_lines</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#count_words">fn count_words</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#dirname">fn dirname</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#echo">fn echo</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#echo_args">fn echo_args</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#empty">fn empty</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#env">fn env</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#exec">fn exec</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#exec_list">fn exec_list</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#exec_pipeline">fn exec_pipeline</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#exists">fn exists</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#exit_">fn exit_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#expand">fn expand</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#expand_all">fn expand_all</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#from_f">fn from_f</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#from_file">fn from_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#grep">fn grep</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#grep_p">fn grep_p</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#grep_r">fn grep_r</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#grep_v">fn grep_v</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#group">fn group</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#head">fn head</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#if_">fn if_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#if_else">fn if_else</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#list_files">fn list_files</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#local_">fn local_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#ls">fn ls</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#mkdir">fn mkdir</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#new_list">fn new_list</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#new_pipe">fn new_pipe</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#new_pipeline">fn new_pipeline</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#non_empty">fn non_empty</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#or_">fn or_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#pipe">fn pipe</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#return_">fn return_</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#rm_dir">fn rm_dir</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#rm_file">fn rm_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#rsort">fn rsort</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#run_list">fn run_list</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#run_pipeline">fn run_pipeline</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#sed">fn sed</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_args">fn set_args</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_cwd">fn set_cwd</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_env_var">fn set_env_var</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_local">fn set_local</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_trace">fn set_trace</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#sh">fn sh</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#sort">fn sort</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#strip_extension">fn strip_extension</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#swap_extensions">fn swap_extensions</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#tail">fn tail</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#test_empty">fn test_empty</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#test_filepath_exists">fn test_filepath_exists</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#test_not_empty">fn test_not_empty</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_f">fn to_f</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_file">fn to_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_stderr">fn to_stderr</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_stdout">fn to_stdout</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#touch">fn touch</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#trim_whitespace">fn trim_whitespace</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#uniq">fn uniq</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#unset_env_var">fn unset_env_var</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#unset_local">fn unset_local</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#which">fn which</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#write_to_file">fn write_to_file</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#Sequence">interface Sequence</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#Step">type Step</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#List">struct List</a>        <ul>
+<li><a href="#List.exec">fn exec</a></li>
+<li><a href="#List.call">fn call</a></li>
+<li><a href="#List.invoke">fn invoke</a></li>
+<li><a href="#List.run_into">fn run_into</a></li>
+</ul>
+</li>
+<li class="open"><a href="#Pipe">struct Pipe</a>        <ul>
+<li><a href="#Pipe.result">fn result</a></li>
+</ul>
+</li>
+<li class="open"><a href="#Pipeline">struct Pipeline</a>        <ul>
+<li><a href="#Pipeline.exec">fn exec</a></li>
+<li><a href="#Pipeline.call">fn call</a></li>
+<li><a href="#Pipeline.invoke">fn invoke</a></li>
+<li><a href="#Pipeline.run_into">fn run_into</a></li>
+</ul>
+</li>
+<li class="open"><a href="#RunResult">struct RunResult</a>        <ul>
+<li><a href="#RunResult.bytes">fn bytes</a></li>
+<li><a href="#RunResult.string">fn string</a></li>
+<li><a href="#RunResult.stderr_string">fn stderr_string</a></li>
+<li><a href="#RunResult.stderr_bytes">fn stderr_bytes</a></li>
+<li><a href="#RunResult.trimmed_string">fn trimmed_string</a></li>
+<li><a href="#RunResult.strings">fn strings</a></li>
+<li><a href="#RunResult.stderr_strings">fn stderr_strings</a></li>
+<li><a href="#RunResult.parse_int">fn parse_int</a></li>
+<li><a href="#RunResult.okay">fn okay</a></li>
+<li><a href="#RunResult.status_code">fn status_code</a></li>
+</ul>
+</li>
+
+					</ul>
+				</nav>
+			</header>
+			<div class="doc-scrollview" tabindex="-1" id="main-content">
+				<div class="doc-container">
+					<div class="doc-content">
+								<section id="v_scr" class="doc-node">
+			<div class="title"><h1> v_scr</h1></div>
+
+
+</section>
+
+		<section id="and_" class="doc-node">
+			<div class="title"><h2>fn and_ <a href="#and_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">and_</span><span class="token punctuation">(</span>sequence Sequence<span class="token punctuation">)</span> Step</code></pre>
+<p>and_ runs a sequence only when the current status is zero.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">and_</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="append_f" class="doc-node">
+			<div class="title"><h2>fn append_f <a href="#append_f">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">append_f</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>append_f is a short alias for append_to_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">append_f</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="append_file" class="doc-node">
+			<div class="title"><h2>fn append_file <a href="#append_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">append_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>append_file is a short alias for append_to_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">append_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="append_to_file" class="doc-node">
+			<div class="title"><h2>fn append_to_file <a href="#append_to_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">append_to_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>append_to_file creates a step that appends the active stream to a file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">append_to_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="args" class="doc-node">
+			<div class="title"><h2>fn args <a href="#args">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">args</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>args is a short alias for set_args.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="basename" class="doc-node">
+			<div class="title"><h2>fn basename <a href="#basename">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">basename</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>basename creates a step that maps each input line to its base path component.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">basename</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="cat_file" class="doc-node">
+			<div class="title"><h2>fn cat_file <a href="#cat_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">cat_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>cat_file creates a step that reads a file into the current output stream.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">cat_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="cat_stdin" class="doc-node">
+			<div class="title"><h2>fn cat_stdin <a href="#cat_stdin">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">cat_stdin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>cat_stdin creates a step that forwards stdin into stdout.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">cat_stdin</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="cd" class="doc-node">
+			<div class="title"><h2>fn cd <a href="#cd">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">cd</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>cd is a short alias for set_cwd.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">cd</span><span class="token punctuation">(</span><span class="token string">'/tmp'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="chmod" class="doc-node">
+			<div class="title"><h2>fn chmod <a href="#chmod">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">chmod</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">,</span> mode <span class="token builtin">u32</span><span class="token punctuation">)</span> Step</code></pre>
+<p>chmod creates a step that changes file permissions.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">chmod</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">,</span> <span class="token number">0o644</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="count_lines" class="doc-node">
+			<div class="title"><h2>fn count_lines <a href="#count_lines">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>count_lines creates a step that counts input lines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="count_words" class="doc-node">
+			<div class="title"><h2>fn count_words <a href="#count_words">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">count_words</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>count_words creates a step that counts whitespace-delimited words.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">count_words</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="dirname" class="doc-node">
+			<div class="title"><h2>fn dirname <a href="#dirname">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">dirname</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>dirname creates a step that maps each input line to its directory component.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="echo" class="doc-node">
+			<div class="title"><h2>fn echo <a href="#echo">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">echo</span><span class="token punctuation">(</span>input <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>echo creates a step that writes expanded text to the current output stream.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="echo_args" class="doc-node">
+			<div class="title"><h2>fn echo_args <a href="#echo_args">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">echo_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>echo_args creates a step that joins positional args with spaces.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">echo_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="empty" class="doc-node">
+			<div class="title"><h2>fn empty <a href="#empty">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>empty is a short alias for test_empty.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="env" class="doc-node">
+			<div class="title"><h2>fn env <a href="#env">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">env</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>env is a short alias for set_env_var.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">env</span><span class="token punctuation">(</span><span class="token string">'APP_ENV'</span><span class="token punctuation">,</span> <span class="token string">'dev'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="exec" class="doc-node">
+			<div class="title"><h2>fn exec <a href="#exec">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">exec</span><span class="token punctuation">(</span>cmd <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>exec creates a step that runs an external command with expanded args.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token string">'printf'</span><span class="token punctuation">,</span> <span class="token string">'%s'</span><span class="token punctuation">,</span> <span class="token string">'hello'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="exec_list" class="doc-node">
+			<div class="title"><h2>fn exec_list <a href="#exec_list">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">exec_list</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>exec_list is a convenience helper for constructing and running a list.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="exec_pipeline" class="doc-node">
+			<div class="title"><h2>fn exec_pipeline <a href="#exec_pipeline">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">exec_pipeline</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>exec_pipeline is a convenience helper for constructing and running a pipeline.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="exists" class="doc-node">
+			<div class="title"><h2>fn exists <a href="#exists">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">exists</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>exists is a short alias for test_filepath_exists.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="exit_" class="doc-node">
+			<div class="title"><h2>fn exit_ <a href="#exit_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">exit_</span><span class="token punctuation">(</span>status <span class="token builtin">int</span><span class="token punctuation">)</span> Step</code></pre>
+<p>exit_ stops the outer sequence with the provided status.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exit_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="expand" class="doc-node">
+			<div class="title"><h2>fn expand <a href="#expand">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">expand</span><span class="token punctuation">(</span>input <span class="token builtin">string</span><span class="token punctuation">,</span> pipe Pipe<span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>expand resolves shell-like variables against the current pipe context.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">=</span> v_scr<span class="token punctuation">.</span><span class="token function">expand</span><span class="token punctuation">(</span>r<span class="token string">'$HOME'</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="expand_all" class="doc-node">
+			<div class="title"><h2>fn expand_all <a href="#expand_all">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">expand_all</span><span class="token punctuation">(</span>values <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> pipe Pipe<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
+<p>expand_all resolves shell-like variables for every string in a slice.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">=</span> v_scr<span class="token punctuation">.</span><span class="token function">expand_all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>r<span class="token string">'$HOME'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="from_f" class="doc-node">
+			<div class="title"><h2>fn from_f <a href="#from_f">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">from_f</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>from_f is a short alias for cat_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">from_f</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="from_file" class="doc-node">
+			<div class="title"><h2>fn from_file <a href="#from_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">from_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>from_file is a short alias for cat_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="grep" class="doc-node">
+			<div class="title"><h2>fn grep <a href="#grep">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">grep</span><span class="token punctuation">(</span>pattern <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>Step</code></pre>
+<p>grep creates a substring filter over the current stream.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">grep</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="grep_p" class="doc-node">
+			<div class="title"><h2>fn grep_p <a href="#grep_p">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">grep_p</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>Step</code></pre>
+<p>grep_p creates a shell-like PCRE grep with flags and optional file arguments.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">grep_p</span><span class="token punctuation">(</span><span class="token string">'-in'</span><span class="token punctuation">,</span> <span class="token string">'^warn'</span><span class="token punctuation">,</span> <span class="token string">'app.log'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="grep_r" class="doc-node">
+			<div class="title"><h2>fn grep_r <a href="#grep_r">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">grep_r</span><span class="token punctuation">(</span>pattern <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>Step</code></pre>
+<p>grep_r creates a lightweight regex filter over the current stream.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">grep_r</span><span class="token punctuation">(</span><span class="token string">'^warn'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="grep_v" class="doc-node">
+			<div class="title"><h2>fn grep_v <a href="#grep_v">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">grep_v</span><span class="token punctuation">(</span>pattern <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>Step</code></pre>
+<p>grep_v creates an inverted substring filter over the current stream.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">grep_v</span><span class="token punctuation">(</span><span class="token string">'debug'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="group" class="doc-node">
+			<div class="title"><h2>fn group <a href="#group">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">group</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> Step</code></pre>
+<p>group builds an inline nested List step.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="head" class="doc-node">
+			<div class="title"><h2>fn head <a href="#head">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">head</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> Step</code></pre>
+<p>head creates a step that keeps the first n input lines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">head</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="if_" class="doc-node">
+			<div class="title"><h2>fn if_ <a href="#if_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">if_</span><span class="token punctuation">(</span>expr Step<span class="token punctuation">,</span> body Sequence<span class="token punctuation">)</span> Step</code></pre>
+<p>if_ runs a sequence when the probe step succeeds with zero status.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">if_</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">non_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'has input'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="if_else" class="doc-node">
+			<div class="title"><h2>fn if_else <a href="#if_else">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">if_else</span><span class="token punctuation">(</span>expr Step<span class="token punctuation">,</span> body Sequence<span class="token punctuation">,</span> else_body Sequence<span class="token punctuation">)</span> Step</code></pre>
+<p>if_else runs one of two sequences based on the probe step status.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">if_else</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">non_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'yes'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'no'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="list_files" class="doc-node">
+			<div class="title"><h2>fn list_files <a href="#list_files">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">list_files</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>list_files creates a step that lists directory entries separated by newlines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">list_files</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="local_" class="doc-node">
+			<div class="title"><h2>fn local_ <a href="#local_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">local_</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>local_ is a short alias for set_local.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">local_</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'demo'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="ls" class="doc-node">
+			<div class="title"><h2>fn ls <a href="#ls">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">ls</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>ls is a short alias for list_files.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">ls</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="mkdir" class="doc-node">
+			<div class="title"><h2>fn mkdir <a href="#mkdir">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">mkdir</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">,</span> mode <span class="token builtin">u32</span><span class="token punctuation">)</span> Step</code></pre>
+<p>mkdir creates a step that ensures a directory exists.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">mkdir</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo'</span><span class="token punctuation">,</span> <span class="token number">0o755</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="new_list" class="doc-node">
+			<div class="title"><h2>fn new_list <a href="#new_list">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">new_list</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> List</code></pre>
+<p>new_list builds a reusable sequential group of steps.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">list <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> list</code></pre>
+</section>
+</section>
+
+		<section id="new_pipe" class="doc-node">
+			<div class="title"><h2>fn new_pipe <a href="#new_pipe">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Pipe</code></pre>
+<p>new_pipe creates an empty execution context with zero status and empty env.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">pipe <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> pipe</code></pre>
+</section>
+</section>
+
+		<section id="new_pipeline" class="doc-node">
+			<div class="title"><h2>fn new_pipeline <a href="#new_pipeline">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">new_pipeline</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> Pipeline</code></pre>
+<p>new_pipeline builds a reusable streaming sequence.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">pipeline <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> pipeline</code></pre>
+</section>
+</section>
+
+		<section id="non_empty" class="doc-node">
+			<div class="title"><h2>fn non_empty <a href="#non_empty">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">non_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>non_empty is a short alias for test_not_empty.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">non_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="or_" class="doc-node">
+			<div class="title"><h2>fn or_ <a href="#or_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">or_</span><span class="token punctuation">(</span>sequence Sequence<span class="token punctuation">)</span> Step</code></pre>
+<p>or_ runs a sequence only when the current status is non-zero.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">or_</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'fallback'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="pipe" class="doc-node">
+			<div class="title"><h2>fn pipe <a href="#pipe">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">pipe</span><span class="token punctuation">(</span>steps <span class="token punctuation">...</span>Step<span class="token punctuation">)</span> Step</code></pre>
+<p>pipe builds an inline nested Pipeline step.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="return_" class="doc-node">
+			<div class="title"><h2>fn return_ <a href="#return_">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">return_</span><span class="token punctuation">(</span>status <span class="token builtin">int</span><span class="token punctuation">)</span> Step</code></pre>
+<p>return_ stops the current sequence with the provided status.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">return_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="rm_dir" class="doc-node">
+			<div class="title"><h2>fn rm_dir <a href="#rm_dir">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">rm_dir</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>rm_dir creates a step that removes a directory tree if it exists.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">rm_dir</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo-dir'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="rm_file" class="doc-node">
+			<div class="title"><h2>fn rm_file <a href="#rm_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">rm_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>rm_file creates a step that removes a file if it exists.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">rm_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="rsort" class="doc-node">
+			<div class="title"><h2>fn rsort <a href="#rsort">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">rsort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>rsort creates a step that sorts lines in descending order.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">rsort</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="run_list" class="doc-node">
+			<div class="title"><h2>fn run_list <a href="#run_list">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">run_list</span><span class="token punctuation">(</span>list List<span class="token punctuation">)</span> Step</code></pre>
+<p>run_list wraps a List so it can be used as a Step.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">run_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="run_pipeline" class="doc-node">
+			<div class="title"><h2>fn run_pipeline <a href="#run_pipeline">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">run_pipeline</span><span class="token punctuation">(</span>pipeline Pipeline<span class="token punctuation">)</span> Step</code></pre>
+<p>run_pipeline wraps a Pipeline so it can be used as a Step.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">run_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="sed" class="doc-node">
+			<div class="title"><h2>fn sed <a href="#sed">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">sed</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>Step</code></pre>
+<p>sed creates a step that delegates to the external <code>sed</code> command.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">sed</span><span class="token punctuation">(</span><span class="token string">'s/a/A/g'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="set_args" class="doc-node">
+			<div class="title"><h2>fn set_args <a href="#set_args">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_args</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>set_args creates a step that replaces positional args for the current sequence.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">set_args</span><span class="token punctuation">(</span><span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="set_cwd" class="doc-node">
+			<div class="title"><h2>fn set_cwd <a href="#set_cwd">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_cwd</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>set_cwd creates a step that changes the working directory for later process steps.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">set_cwd</span><span class="token punctuation">(</span><span class="token string">'/tmp'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="set_env_var" class="doc-node">
+			<div class="title"><h2>fn set_env_var <a href="#set_env_var">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_env_var</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>set_env_var creates a step that sets or updates an environment variable.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">set_env_var</span><span class="token punctuation">(</span><span class="token string">'APP_ENV'</span><span class="token punctuation">,</span> <span class="token string">'dev'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="set_local" class="doc-node">
+			<div class="title"><h2>fn set_local <a href="#set_local">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_local</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>set_local creates a step that sets a local shell-like variable.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">set_local</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'demo'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="set_trace" class="doc-node">
+			<div class="title"><h2>fn set_trace <a href="#set_trace">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_trace</span><span class="token punctuation">(</span>enabled <span class="token builtin">bool</span><span class="token punctuation">)</span> Step</code></pre>
+<p>set_trace creates a step that enables or disables lightweight process tracing.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">set_trace</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="sh" class="doc-node">
+			<div class="title"><h2>fn sh <a href="#sh">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">sh</span><span class="token punctuation">(</span>line <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>sh creates a step that runs a shell command line after expansion.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">sh</span><span class="token punctuation">(</span><span class="token string">'printf &#34;%s&#34; &#34;hello&#34;'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="sort" class="doc-node">
+			<div class="title"><h2>fn sort <a href="#sort">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>sort creates a step that sorts lines in ascending order.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="strip_extension" class="doc-node">
+			<div class="title"><h2>fn strip_extension <a href="#strip_extension">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">strip_extension</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>strip_extension creates a step that removes the final file extension from each line.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">strip_extension</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="swap_extensions" class="doc-node">
+			<div class="title"><h2>fn swap_extensions <a href="#swap_extensions">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">swap_extensions</span><span class="token punctuation">(</span>old_ext <span class="token builtin">string</span><span class="token punctuation">,</span> new_ext <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>swap_extensions creates a step that replaces one extension with another.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">swap_extensions</span><span class="token punctuation">(</span><span class="token string">'.txt'</span><span class="token punctuation">,</span> <span class="token string">'.md'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="tail" class="doc-node">
+			<div class="title"><h2>fn tail <a href="#tail">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">tail</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> Step</code></pre>
+<p>tail creates a step that keeps the last n input lines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">tail</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="test_empty" class="doc-node">
+			<div class="title"><h2>fn test_empty <a href="#test_empty">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">test_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>test_empty creates a step that succeeds when the active stream is empty.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">test_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="test_filepath_exists" class="doc-node">
+			<div class="title"><h2>fn test_filepath_exists <a href="#test_filepath_exists">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">test_filepath_exists</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>test_filepath_exists creates a step that succeeds when the path exists.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">test_filepath_exists</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="test_not_empty" class="doc-node">
+			<div class="title"><h2>fn test_not_empty <a href="#test_not_empty">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">test_not_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>test_not_empty creates a step that succeeds when the active stream is not empty.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">test_not_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="to_f" class="doc-node">
+			<div class="title"><h2>fn to_f <a href="#to_f">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">to_f</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>to_f is a short alias for write_to_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">to_f</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="to_file" class="doc-node">
+			<div class="title"><h2>fn to_file <a href="#to_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">to_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>to_file is a short alias for write_to_file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">to_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="to_stderr" class="doc-node">
+			<div class="title"><h2>fn to_stderr <a href="#to_stderr">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">to_stderr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>to_stderr creates a step that prints the active stream to stderr.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">to_stderr</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="to_stdout" class="doc-node">
+			<div class="title"><h2>fn to_stdout <a href="#to_stdout">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">to_stdout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>to_stdout creates a step that prints the active stream to stdout.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">to_stdout</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="touch" class="doc-node">
+			<div class="title"><h2>fn touch <a href="#touch">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">touch</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>touch creates a step that creates an empty file when it does not exist.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">touch</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="trim_whitespace" class="doc-node">
+			<div class="title"><h2>fn trim_whitespace <a href="#trim_whitespace">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">trim_whitespace</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>trim_whitespace creates a step that trims leading and trailing whitespace.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">trim_whitespace</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="uniq" class="doc-node">
+			<div class="title"><h2>fn uniq <a href="#uniq">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">uniq</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Step</code></pre>
+<p>uniq creates a step that removes duplicate lines while preserving order.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">uniq</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="unset_env_var" class="doc-node">
+			<div class="title"><h2>fn unset_env_var <a href="#unset_env_var">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">unset_env_var</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>unset_env_var creates a step that removes an environment variable override.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">unset_env_var</span><span class="token punctuation">(</span><span class="token string">'APP_ENV'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="unset_local" class="doc-node">
+			<div class="title"><h2>fn unset_local <a href="#unset_local">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">unset_local</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>unset_local creates a step that removes a local shell-like variable.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">unset_local</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="which" class="doc-node">
+			<div class="title"><h2>fn which <a href="#which">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">which</span><span class="token punctuation">(</span>cmd <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>which creates a step that resolves an executable from PATH.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">which</span><span class="token punctuation">(</span><span class="token string">'v'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="write_to_file" class="doc-node">
+			<div class="title"><h2>fn write_to_file <a href="#write_to_file">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">write_to_file</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>write_to_file creates a step that writes the active stream to a file.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">_ <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">write_to_file</span><span class="token punctuation">(</span><span class="token string">'/tmp/demo.txt'</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="Sequence" class="doc-node">
+			<div class="title"><h2>interface Sequence <a href="#Sequence">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">interface</span> <span class="token symbol">Sequence</span> <span class="token punctuation">{</span>
+	<span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span>RunResult
+	<span class="token function">run_into</span><span class="token punctuation">(</span><span class="token keyword">mut</span> pipe Pipe<span class="token punctuation">)</span> <span class="token operator">!</span>RunResult
+<span class="token punctuation">}</span></code></pre>
+<p>Sequence is a reusable ordered collection of steps such as Pipeline or List.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">sequence <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">:=</span> sequence</code></pre>
+</section>
+</section>
+
+		<section id="Step" class="doc-node">
+			<div class="title"><h2>type Step <a href="#Step">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> Step <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> Pipe<span class="token punctuation">)</span> <span class="token operator">!</span></code></pre>
+<p>Step is a single executable unit that mutates the current Pipe state.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">step <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">:=</span> step</code></pre>
+</section>
+</section>
+
+		<section id="List" class="doc-node">
+			<div class="title"><h2>struct List <a href="#List">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">List</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	steps <span class="token punctuation">[</span><span class="token punctuation">]</span>Step
+<span class="token punctuation">}</span></code></pre>
+<p>List runs steps sequentially while accumulating shared stdout and stderr.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">list <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> list</code></pre>
+</section>
+</section>
+
+		<section id="List.exec" class="doc-node">
+			<div class="title"><h2>fn (List) exec <a href="#List.exec">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>list List<span class="token punctuation">)</span> <span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>exec runs the list in a fresh Pipe.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="List.call" class="doc-node">
+			<div class="title"><h2>fn (List) call <a href="#List.call">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>list List<span class="token punctuation">)</span> <span class="token function">call</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>call runs the list in a fresh Pipe with positional args preset.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'$1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="List.invoke" class="doc-node">
+			<div class="title"><h2>fn (List) invoke <a href="#List.invoke">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>list List<span class="token punctuation">)</span> <span class="token function">invoke</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>invoke wraps the list as a step and temporarily overrides positional args.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">nested <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'$1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">:=</span> nested</code></pre>
+</section>
+</section>
+
+		<section id="List.run_into" class="doc-node">
+			<div class="title"><h2>fn (List) run_into <a href="#List.run_into">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>list List<span class="token punctuation">)</span> <span class="token function">run_into</span><span class="token punctuation">(</span><span class="token keyword">mut</span> pipe Pipe<span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>run_into executes the list inside an existing Pipe context.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v"><span class="token keyword">mut</span> pipe <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_list</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">run_into</span><span class="token punctuation">(</span><span class="token keyword">mut</span> pipe<span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="Pipe" class="doc-node">
+			<div class="title"><h2>struct Pipe <a href="#Pipe">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">Pipe</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	stdin     <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span>
+	stdout    <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span>
+	stderr    <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span>
+	status    <span class="token builtin">int</span>
+	cwd       <span class="token builtin">string</span>
+	env       <span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	args      <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	locals    <span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	trace     <span class="token builtin">bool</span>
+	stopped   <span class="token builtin">bool</span>
+	stop_kind StopKind
+<span class="token punctuation">}</span></code></pre>
+<p>Pipe carries the mutable execution state shared by steps in a sequence.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v"><span class="token keyword">mut</span> pipe <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> pipe</code></pre>
+</section>
+</section>
+
+		<section id="Pipe.result" class="doc-node">
+			<div class="title"><h2>fn (Pipe) result <a href="#Pipe.result">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>p Pipe<span class="token punctuation">)</span> <span class="token function">result</span><span class="token punctuation">(</span><span class="token punctuation">)</span> RunResult</code></pre>
+<p>result snapshots the current pipe state into a RunResult value.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v"><span class="token keyword">mut</span> pipe <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> result <span class="token operator">:=</span> pipe<span class="token punctuation">.</span><span class="token function">result</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="Pipeline" class="doc-node">
+			<div class="title"><h2>struct Pipeline <a href="#Pipeline">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">Pipeline</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	steps <span class="token punctuation">[</span><span class="token punctuation">]</span>Step
+<span class="token punctuation">}</span></code></pre>
+<p>Pipeline connects stdout of each step to stdin of the next one.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">pipeline <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> pipeline</code></pre>
+</section>
+</section>
+
+		<section id="Pipeline.exec" class="doc-node">
+			<div class="title"><h2>fn (Pipeline) exec <a href="#Pipeline.exec">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>pipeline Pipeline<span class="token punctuation">)</span> <span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>exec runs the pipeline in a fresh Pipe.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">count_lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="Pipeline.call" class="doc-node">
+			<div class="title"><h2>fn (Pipeline) call <a href="#Pipeline.call">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>pipeline Pipeline<span class="token punctuation">)</span> <span class="token function">call</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>call runs the pipeline in a fresh Pipe with positional args preset.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'$1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="Pipeline.invoke" class="doc-node">
+			<div class="title"><h2>fn (Pipeline) invoke <a href="#Pipeline.invoke">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>pipeline Pipeline<span class="token punctuation">)</span> <span class="token function">invoke</span><span class="token punctuation">(</span>args <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> Step</code></pre>
+<p>invoke wraps the pipeline as a step and temporarily overrides positional args.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">nested <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'$1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> _ <span class="token operator">:=</span> nested</code></pre>
+</section>
+</section>
+
+		<section id="Pipeline.run_into" class="doc-node">
+			<div class="title"><h2>fn (Pipeline) run_into <a href="#Pipeline.run_into">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>pipeline Pipeline<span class="token punctuation">)</span> <span class="token function">run_into</span><span class="token punctuation">(</span><span class="token keyword">mut</span> pipe Pipe<span class="token punctuation">)</span> <span class="token operator">!</span>RunResult</code></pre>
+<p>run_into executes the pipeline inside an existing Pipe context.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v"><span class="token keyword">mut</span> pipe <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">new_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">run_into</span><span class="token punctuation">(</span><span class="token keyword">mut</span> pipe<span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="RunResult" class="doc-node">
+			<div class="title"><h2>struct RunResult <a href="#RunResult">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">RunResult</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	stdout <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span>
+	stderr <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span>
+	status <span class="token builtin">int</span>
+<span class="token punctuation">}</span></code></pre>
+<p>RunResult is the immutable output of executing a sequence.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'42'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result</code></pre>
+</section>
+</section>
+
+		<section id="RunResult.bytes" class="doc-node">
+			<div class="title"><h2>fn (RunResult) bytes <a href="#RunResult.bytes">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span></code></pre>
+<p>bytes returns stdout as raw bytes.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.string" class="doc-node">
+			<div class="title"><h2>fn (RunResult) string <a href="#RunResult.string">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token builtin">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>string returns stdout as a string.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token builtin">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.stderr_string" class="doc-node">
+			<div class="title"><h2>fn (RunResult) stderr_string <a href="#RunResult.stderr_string">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">stderr_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>stderr_string returns stderr as a string.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">to_stderr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">stderr_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.stderr_bytes" class="doc-node">
+			<div class="title"><h2>fn (RunResult) stderr_bytes <a href="#RunResult.stderr_bytes">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">stderr_bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span></code></pre>
+<p>stderr_bytes returns stderr as raw bytes.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">to_stderr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">stderr_bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.trimmed_string" class="doc-node">
+			<div class="title"><h2>fn (RunResult) trimmed_string <a href="#RunResult.trimmed_string">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">trimmed_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>trimmed_string returns stdout trimmed of leading and trailing whitespace.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'  hi  '</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">trim_whitespace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">trimmed_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.strings" class="doc-node">
+			<div class="title"><h2>fn (RunResult) strings <a href="#RunResult.strings">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">strings</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
+<p>strings splits trimmed stdout into lines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'a\\nb'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">strings</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.stderr_strings" class="doc-node">
+			<div class="title"><h2>fn (RunResult) stderr_strings <a href="#RunResult.stderr_strings">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">stderr_strings</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
+<p>stderr_strings splits trimmed stderr into lines.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'warn'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v_scr<span class="token punctuation">.</span><span class="token function">to_stderr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">stderr_strings</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.parse_int" class="doc-node">
+			<div class="title"><h2>fn (RunResult) parse_int <a href="#RunResult.parse_int">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">parse_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">int</span></code></pre>
+<p>parse_int parses trimmed stdout as an integer.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'42'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">:=</span> result<span class="token punctuation">.</span><span class="token function">parse_int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.okay" class="doc-node">
+			<div class="title"><h2>fn (RunResult) okay <a href="#RunResult.okay">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">okay</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
+<p>okay reports whether the exit status is zero.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">okay</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+		<section id="RunResult.status_code" class="doc-node">
+			<div class="title"><h2>fn (RunResult) status_code <a href="#RunResult.status_code">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>result RunResult<span class="token punctuation">)</span> <span class="token function">status_code</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+<p>status_code returns the final exit status.</p>
+
+<section class="doc-node examples"><h4>Example</h4>
+<pre>
+<code class="language-v">result <span class="token operator">:=</span> v_scr<span class="token punctuation">.</span><span class="token function">exec_pipeline</span><span class="token punctuation">(</span>v_scr<span class="token punctuation">.</span><span class="token function">echo</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> _ <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">status_code</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</section>
+</section>
+
+
+						<div class="footer">Powered by vdoc. Generated on: 19 Mar 2026 04:16:07</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script src="doc.js"></script>
+		<script async src="search_index.js"></script>
+	</body>
+</html>
