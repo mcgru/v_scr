@@ -161,6 +161,12 @@ pub fn set_trace(enabled bool) Step {
     }
 }
 
+// unset_trace creates a step that disables lightweight process tracing.
+// Example: _ := v_scr.unset_trace()
+pub fn unset_trace() Step {
+    return set_trace(false)
+}
+
 fn merged_environment(pipe Pipe) map[string]string {
     mut envs := os.environ()
     for key, value in pipe.env {

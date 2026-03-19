@@ -8,6 +8,7 @@
 - [append_to_file](#append_to_file)
 - [args](#args)
 - [basename](#basename)
+- [cat](#cat)
 - [cat_file](#cat_file)
 - [cat_stdin](#cat_stdin)
 - [cd](#cd)
@@ -30,7 +31,9 @@
 - [from_file](#from_file)
 - [grep](#grep)
 - [grep_p](#grep_p)
+- [grep_p_v](#grep_p_v)
 - [grep_r](#grep_r)
+- [grep_r_v](#grep_r_v)
 - [grep_v](#grep_v)
 - [group](#group)
 - [head](#head)
@@ -39,6 +42,7 @@
 - [list_files](#list_files)
 - [local_](#local_)
 - [ls](#ls)
+- [ls_l](#ls_l)
 - [mkdir](#mkdir)
 - [new_list](#new_list)
 - [new_pipe](#new_pipe)
@@ -46,13 +50,18 @@
 - [non_empty](#non_empty)
 - [or_](#or_)
 - [pipe](#pipe)
+- [pwd](#pwd)
 - [return_](#return_)
+- [rm](#rm)
 - [rm_dir](#rm_dir)
 - [rm_file](#rm_file)
+- [rmdir](#rmdir)
 - [rsort](#rsort)
 - [run_list](#run_list)
 - [run_pipeline](#run_pipeline)
 - [sed](#sed)
+- [sed_r](#sed_r)
+- [sed_r_z](#sed_r_z)
 - [set_args](#set_args)
 - [set_cwd](#set_cwd)
 - [set_env_var](#set_env_var)
@@ -60,6 +69,8 @@
 - [set_trace](#set_trace)
 - [sh](#sh)
 - [sort](#sort)
+- [stderr](#stderr)
+- [stdout](#stdout)
 - [strip_extension](#strip_extension)
 - [swap_extensions](#swap_extensions)
 - [tail](#tail)
@@ -75,6 +86,7 @@
 - [uniq](#uniq)
 - [unset_env_var](#unset_env_var)
 - [unset_local](#unset_local)
+- [unset_trace](#unset_trace)
 - [which](#which)
 - [write_to_file](#write_to_file)
 - [Sequence](#Sequence)
@@ -199,12 +211,28 @@ _ := v_scr.basename()
 
 [[Return to contents]](#Contents)
 
+## cat
+```v
+fn cat(args ...string) Step
+```
+
+cat creates a step that reads a file, or forwards stdin when no path is given.
+
+Example
+```v
+
+_ := v_scr.cat('/tmp/demo.txt')
+
+```
+
+[[Return to contents]](#Contents)
+
 ## cat_file
 ```v
 fn cat_file(path string) Step
 ```
 
-cat_file creates a step that reads a file into the current output stream.
+cat_file is a compatibility alias for cat(path).
 
 Example
 ```v
@@ -551,6 +579,22 @@ _ := v_scr.grep_p('-in', '^warn', 'app.log') or { panic(err) }
 
 [[Return to contents]](#Contents)
 
+## grep_p_v
+```v
+fn grep_p_v(args ...string) !Step
+```
+
+grep_p_v creates an inverted shell-like PCRE grep.
+
+Example
+```v
+
+_ := v_scr.grep_p_v('^debug', 'app.log') or { panic(err) }
+
+```
+
+[[Return to contents]](#Contents)
+
 ## grep_r
 ```v
 fn grep_r(pattern string) !Step
@@ -562,6 +606,22 @@ Example
 ```v
 
 _ := v_scr.grep_r('^warn') or { panic(err) }
+
+```
+
+[[Return to contents]](#Contents)
+
+## grep_r_v
+```v
+fn grep_r_v(pattern string) !Step
+```
+
+grep_r_v creates an inverted lightweight regex filter over the current stream.
+
+Example
+```v
+
+_ := v_scr.grep_r_v('^debug') or { panic(err) }
 
 ```
 
@@ -604,7 +664,7 @@ _ := v_scr.group(v_scr.echo('a'), v_scr.echo('b'))
 fn head(n int) Step
 ```
 
-head creates a step that keeps the first n input lines.
+head creates a step that keeps the first n input lines, or all but the last abs(n) lines when n is negative.
 
 Example
 ```v
@@ -649,7 +709,7 @@ _ := v_scr.if_else(v_scr.non_empty(), v_scr.new_list(v_scr.echo('yes')), v_scr.n
 
 ## list_files
 ```v
-fn list_files(path string) Step
+fn list_files(args ...string) Step
 ```
 
 list_files creates a step that lists directory entries separated by newlines.
@@ -681,7 +741,7 @@ _ := v_scr.local_('name', 'demo')
 
 ## ls
 ```v
-fn ls(path string) Step
+fn ls(args ...string) Step
 ```
 
 ls is a short alias for list_files.
@@ -690,6 +750,22 @@ Example
 ```v
 
 _ := v_scr.ls('.')
+
+```
+
+[[Return to contents]](#Contents)
+
+## ls_l
+```v
+fn ls_l(args ...string) Step
+```
+
+ls_l delegates to the external `ls -l` command for long-format output.
+
+Example
+```v
+
+_ := v_scr.ls_l('.')
 
 ```
 
@@ -807,6 +883,22 @@ _ := v_scr.pipe(v_scr.echo('a\\nb'), v_scr.count_lines())
 
 [[Return to contents]](#Contents)
 
+## pwd
+```v
+fn pwd() Step
+```
+
+pwd creates a step that prints the current working directory context.
+
+Example
+```v
+
+_ := v_scr.pwd()
+
+```
+
+[[Return to contents]](#Contents)
+
 ## return_
 ```v
 fn return_(status int) Step
@@ -818,6 +910,22 @@ Example
 ```v
 
 _ := v_scr.return_(1)
+
+```
+
+[[Return to contents]](#Contents)
+
+## rm
+```v
+fn rm(args ...string) Step
+```
+
+rm removes files and optionally directories with `-r`, while `-f` ignores missing paths and `-q` suppresses stderr.
+
+Example
+```v
+
+_ := v_scr.rm('-f', '/tmp/demo.txt')
 
 ```
 
@@ -850,6 +958,22 @@ Example
 ```v
 
 _ := v_scr.rm_file('/tmp/demo.txt')
+
+```
+
+[[Return to contents]](#Contents)
+
+## rmdir
+```v
+fn rmdir(args ...string) Step
+```
+
+rmdir removes directories, using `-r` for recursive deletion, `-f` to ignore missing paths, and `-q` to suppress stderr.
+
+Example
+```v
+
+_ := v_scr.rmdir('-r', '-f', '/tmp/demo-dir')
 
 ```
 
@@ -914,6 +1038,38 @@ Example
 ```v
 
 _ := v_scr.sed('s/a/A/g') or { panic(err) }
+
+```
+
+[[Return to contents]](#Contents)
+
+## sed_r
+```v
+fn sed_r(args ...string) !Step
+```
+
+sed_r creates a GNU sed step with `-r` enabled.
+
+Example
+```v
+
+_ := v_scr.sed_r('s/(a+)/A/g') or { panic(err) }
+
+```
+
+[[Return to contents]](#Contents)
+
+## sed_r_z
+```v
+fn sed_r_z(args ...string) !Step
+```
+
+sed_r_z creates a GNU sed step with `-r -z` enabled.
+
+Example
+```v
+
+_ := v_scr.sed_r_z('s/a/A/g') or { panic(err) }
 
 ```
 
@@ -1031,6 +1187,38 @@ _ := v_scr.sort()
 
 [[Return to contents]](#Contents)
 
+## stderr
+```v
+fn stderr(args ...OutputArg) Step
+```
+
+stderr creates a step that prints the active stream to stderr, or writes/appends it to a file while retaining stderr capture.
+
+Example
+```v
+
+_ := v_scr.stderr('/tmp/demo.err')
+
+```
+
+[[Return to contents]](#Contents)
+
+## stdout
+```v
+fn stdout(args ...OutputArg) Step
+```
+
+stdout creates a step that prints the active stream, or writes/appends it to a file.
+
+Example
+```v
+
+_ := v_scr.stdout('/tmp/demo.txt', false)
+
+```
+
+[[Return to contents]](#Contents)
+
 ## strip_extension
 ```v
 fn strip_extension() Step
@@ -1068,7 +1256,7 @@ _ := v_scr.swap_extensions('.txt', '.md')
 fn tail(n int) Step
 ```
 
-tail creates a step that keeps the last n input lines.
+tail creates a step that keeps the last n input lines, or skips the first abs(n) lines when n is negative.
 
 Example
 ```v
@@ -1164,7 +1352,7 @@ _ := v_scr.to_file('/tmp/demo.txt')
 fn to_stderr() Step
 ```
 
-to_stderr creates a step that prints the active stream to stderr.
+to_stderr is a compatibility alias for stderr().
 
 Example
 ```v
@@ -1180,7 +1368,7 @@ _ := v_scr.to_stderr()
 fn to_stdout() Step
 ```
 
-to_stdout creates a step that prints the active stream to stdout.
+to_stdout is a compatibility alias for stdout().
 
 Example
 ```v
@@ -1266,6 +1454,22 @@ Example
 ```v
 
 _ := v_scr.unset_local('name')
+
+```
+
+[[Return to contents]](#Contents)
+
+## unset_trace
+```v
+fn unset_trace() Step
+```
+
+unset_trace creates a step that disables lightweight process tracing.
+
+Example
+```v
+
+_ := v_scr.unset_trace()
 
 ```
 
@@ -1612,7 +1816,7 @@ stderr_string returns stderr as a string.
 Example
 ```v
 
-result := v_scr.exec_pipeline(v_scr.to_stderr()) or { return }; _ = result.stderr_string()
+result := v_scr.exec_pipeline(v_scr.stderr()) or { return }; _ = result.stderr_string()
 
 ```
 
@@ -1628,7 +1832,7 @@ stderr_bytes returns stderr as raw bytes.
 Example
 ```v
 
-result := v_scr.exec_pipeline(v_scr.to_stderr()) or { return }; _ = result.stderr_bytes()
+result := v_scr.exec_pipeline(v_scr.stderr()) or { return }; _ = result.stderr_bytes()
 
 ```
 
@@ -1676,7 +1880,7 @@ stderr_strings splits trimmed stderr into lines.
 Example
 ```v
 
-result := v_scr.exec_pipeline(v_scr.echo('warn'), v_scr.to_stderr()) or { return }; _ = result.stderr_strings()
+result := v_scr.exec_pipeline(v_scr.echo('warn'), v_scr.stderr()) or { return }; _ = result.stderr_strings()
 
 ```
 
@@ -1730,4 +1934,4 @@ result := v_scr.exec_pipeline(v_scr.echo('ok')) or { return }; _ = result.status
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 19 Mar 2026 04:16:07
+#### Powered by vdoc. Generated on: 19 Mar 2026 04:51:09

@@ -13,8 +13,10 @@
 - shell-like expansion для `args`, `locals`, `env`;
 - nested orchestration через `run_pipeline`, `run_list`, `pipe`, `group`, `call`, `invoke`;
 - разделение `return_` и `exit_` semantics для вложенных sequence;
-- базовые `sources`, `filters`, `sinks`, `builtins`, `logic`;
+- базовые `sources`, `filters`, `sinks`, `builtins`, `logic`, включая `cat`, `stdout`/`stderr`, `rm`/`rmdir`, `pwd`, `ls_l`, `grep_r_v`, `grep_p_v`, `sed_r`, `sed_r_z`;
+- GNU-подобная semantics для `head(-n)` и `tail(-n)`;
 - short aliases для shell-like ergonomics;
+- `v doc`-документация с проверяемыми `Example:` комментариями;
 - runnable examples и тесты для process/file/nested scenarios.
 
 Проверено:
@@ -109,7 +111,7 @@ API должен быть V-идиоматичным:
 import v_scr
 
 count := v_scr.new_pipeline(
-    v_scr.cat_file('/tmp/app.log'),
+    v_scr.cat('/tmp/app.log'),
     v_scr.grep('error')!,
     v_scr.count_lines(),
 ).exec()!.parse_int()!
@@ -186,13 +188,16 @@ pub struct List {}
 
 - `echo(input string) Step`
 - `echo_args() Step`
+- `cat(args ...string) Step`
 - `cat_file(path string) Step`
 - `from_file(path string) Step`
 - `from_f(path string) Step`
 - `cat_stdin() Step`
 - `which(cmd string) Step`
-- `list_files(path string) Step`
-- `ls(path string) Step`
+- `list_files(args ...string) Step`
+- `ls(args ...string) Step`
+- `ls_l(args ...string) Step`
+- `pwd() Step`
 - `exec(cmd string, args ...string) Step`
 - `sh(line string) Step`
 
@@ -201,8 +206,12 @@ pub struct List {}
 - `grep(pattern string) !Step`
 - `grep_v(pattern string) !Step`
 - `grep_r(pattern string) !Step`
+- `grep_r_v(pattern string) !Step`
 - `grep_p(args ...string) !Step`
+- `grep_p_v(args ...string) !Step`
 - `sed(args ...string) !Step`
+- `sed_r(args ...string) !Step`
+- `sed_r_z(args ...string) !Step`
 - `head(n int) Step`
 - `tail(n int) Step`
 - `count_lines() Step`
@@ -218,6 +227,8 @@ pub struct List {}
 
 ### Sinks
 
+- `stdout(args ...OutputArg) Step`
+- `stderr(args ...OutputArg) Step`
 - `to_stdout() Step`
 - `to_stderr() Step`
 - `write_to_file(path string) Step`
@@ -232,6 +243,8 @@ pub struct List {}
 ### Builtins
 
 - `mkdir(path string, mode u32) Step`
+- `rm(args ...string) Step`
+- `rmdir(args ...string) Step`
 - `rm_file(path string) Step`
 - `rm_dir(path string) Step`
 - `touch(path string) Step`
@@ -267,6 +280,7 @@ pub struct List {}
 - `set_cwd(path string) Step`
 - `cd(path string) Step`
 - `set_trace(enabled bool) Step`
+- `unset_trace() Step`
 - `(pipeline Pipeline).call(args ...string) !RunResult`
 - `(list List).call(args ...string) !RunResult`
 - `(pipeline Pipeline).invoke(args ...string) Step`
@@ -405,7 +419,7 @@ v_scr/
 Сделать минимум самых полезных операций:
 
 - `echo`
-- `cat_file`
+- `cat`
 - `grep`
 - `head` / `tail`
 - `count_lines`
@@ -413,12 +427,12 @@ v_scr/
 - `sort`
 - `uniq`
 - `trim_whitespace`
-- `to_stdout`
-- `to_stderr`
+- `stdout`
+- `stderr`
 - `write_to_file`
 - `append_to_file`
 - `mkdir`
-- `rm_file`
+- `rm`
 - `touch`
 - `test_filepath_exists`
 
@@ -538,20 +552,23 @@ v_scr/
 1. Подготовить packaging/VPM-facing polish.
 2. При желании сделать отдельный release checklist.
 3. Расширить cross-platform coverage.
-4. Решить, нужны ли еще shell-like variadic wrappers кроме уже добавленных `sed(...)` и `grep_p(...)`.
+4. Решить, нужен ли shell-like variadic wrapper для `grep(...)`, или typed substring variant лучше оставить отдельной функцией.
 5. Заменить экранированные `\$...` в примерах на raw strings там, где это улучшает читаемость.
 
 ## Canonical API
 
 Для `0.1.x` long names считаются canonical API:
 
-- `cat_file`, `write_to_file`, `append_to_file`;
+- `cat`, `stdout`, `stderr`, `write_to_file`, `append_to_file`;
+- `rm`, `rmdir`, `pwd`;
 - `set_args`, `set_env_var`, `set_local`, `set_cwd`;
 - `run_pipeline`, `run_list`.
 
 Short names считаются stable scripting aliases:
 
-- `from_file`, `from_f`, `to_file`, `to_f`, `append_file`, `append_f`;
+- `cat_file`, `cat_stdin`, `from_file`, `from_f`;
+- `to_stdout`, `to_stderr`, `to_file`, `to_f`, `append_file`, `append_f`;
+- `rm_file`, `rm_dir`;
 - `args`, `env`, `local_`, `cd`;
 - `pipe`, `group`;
 - `exists`, `empty`, `non_empty`.

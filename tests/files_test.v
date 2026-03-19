@@ -38,6 +38,46 @@ fn test_file_steps_roundtrip() {
     assert !os.exists(base)
 }
 
+fn test_cat_stdout_stderr_and_rm_helpers() {
+    base := os.join_path(os.vtmp_dir(), 'v_scr_sink_rm_test')
+    file_path := os.join_path(base, 'data.txt')
+    err_path := os.join_path(base, 'data.err')
+    subdir := os.join_path(base, 'nested')
+    os.rmdir_all(base) or {}
+
+    result := v_scr.new_list(
+        v_scr.mkdir(subdir, 0o755),
+        v_scr.pipe(
+            v_scr.echo('alpha'),
+            v_scr.stdout(file_path, false),
+        ),
+        v_scr.pipe(
+            v_scr.echo('beta'),
+            v_scr.stderr(err_path, false),
+        ),
+        v_scr.pipe(
+            v_scr.cat(file_path),
+            v_scr.append_f(file_path),
+        ),
+        v_scr.rm('-q', '-f', os.join_path(base, 'missing.txt')),
+        v_scr.rmdir('-r', subdir),
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.status_code() == 0
+    assert os.read_file(file_path) or { '' } == 'alphaalpha'
+    assert os.read_file(err_path) or { '' } == 'beta'
+    assert result.stderr_string() == 'beta'
+    assert !os.exists(subdir)
+
+    cleanup := v_scr.new_list(
+        v_scr.rmdir('-r', base),
+    ).exec() or { panic(err) }
+    assert cleanup.okay()
+}
+
 fn test_touch_and_test_filepath_exists() {
     base := os.join_path(os.vtmp_dir(), 'v_scr_touch_test')
     file_path := os.join_path(base, 'touch.txt')
@@ -130,5 +170,26 @@ fn test_grep_p_with_files() {
     assert result.strings().len == 2
     assert result.strings()[0] == '${a_path}:1:warn one'
     assert result.strings()[1] == '${b_path}:1:WARN two'
+    os.rmdir_all(base) or {}
+}
+
+fn test_grep_p_v_with_files() {
+    base := os.join_path(os.vtmp_dir(), 'v_scr_grep_p_v_files_test')
+    a_path := os.join_path(base, 'a.txt')
+    os.rmdir_all(base) or {}
+    os.mkdir_all(base) or { panic(err) }
+    os.write_file(a_path, 'warn one\ninfo\n') or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    result := v_scr.new_list(
+        v_scr.grep_p_v('^warn', a_path) or { panic(err) },
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.trimmed_string() == 'info'
     os.rmdir_all(base) or {}
 }

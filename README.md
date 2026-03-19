@@ -26,13 +26,16 @@ The next release-facing step is packaging polish for VPM publication, not core r
 
 For `0.1.x`, treat the long names as canonical API:
 
-- `cat_file`, `write_to_file`, `append_to_file`
+- `cat`, `stdout`, `stderr`, `write_to_file`, `append_to_file`
+- `rm`, `rmdir`, `pwd`
 - `set_args`, `set_env_var`, `set_local`, `set_cwd`
 - `run_pipeline`, `run_list`
 
 Treat the short names as stable scripting aliases:
 
-- `from_file`, `from_f`, `to_file`, `to_f`, `append_file`, `append_f`
+- `cat_file`, `cat_stdin`, `from_file`, `from_f`
+- `to_stdout`, `to_stderr`, `to_file`, `to_f`, `append_file`, `append_f`
+- `rm_file`, `rm_dir`
 - `args`, `env`, `local_`, `cd`
 - `pipe`, `group`
 
@@ -101,18 +104,28 @@ Use the short names when you are writing shell-like scripts and the intent is al
 | Long name | Short name | Typical use |
 | --- | --- | --- |
 | `grep_r(pattern)` | - | Lightweight regex filter over the current stream |
+| `grep_r_v(pattern)` | - | Inverted lightweight regex filter |
 | `grep_p(args...)` | - | Shell-like PCRE grep with flags and optional files |
-| `cat_file(path)` | `from_file(path)`, `from_f(path)` | Read a file into a pipeline |
+| `grep_p_v(args...)` | - | Inverted shell-like PCRE grep |
+| `cat(args...)` | `cat_file(path)`, `cat_stdin()`, `from_file(path)`, `from_f(path)` | Read a file, or pass stdin through when called without args |
 | `write_to_file(path)` | `to_file(path)`, `to_f(path)` | Final sink in a pipeline |
+| `stdout(args...)` | `to_stdout()` | Print the active stream, or write/append it to a file |
+| `stderr(args...)` | `to_stderr()` | Print the active stream to stderr, or write/append it to a file |
 | `append_to_file(path)` | `append_file(path)`, `append_f(path)` | Append pipeline output to a file |
-| `list_files(path)` | `ls(path)` | Small shell-like directory listing |
+| `list_files(args...)` | `ls(args...)` | Small shell-like directory listing |
+| `ls_l(args...)` | - | Long-format directory listing via `ls -l` |
 | `test_filepath_exists(path)` | `exists(path)` | Guard/check before branching |
+| `rm(args...)` | `rm_file(path)` | Remove files, and directories with `-r` |
+| `rmdir(args...)` | `rm_dir(path)` | Remove directories, with `-r`, `-f`, `-q` flags |
+| `pwd()` | - | Emit the current pipe working directory |
 | `set_args(...)` | `args(...)` | Positional args for a sequence |
 | `set_env_var(name, value)` | `env(name, value)` | Environment setup before `exec()` / `sh()` |
 | `set_local(name, value)` | `local_(name, value)` | Local shell-like variables |
 | `set_cwd(path)` | `cd(path)` | Change working directory for later steps |
+| `set_trace(bool)` | `unset_trace()` | Enable or disable process tracing |
 | `test_empty()` | `empty()` | Assert/check empty active stream |
 | `test_not_empty()` | `non_empty()` | Assert/check non-empty active stream |
+| `sed(args...)` | `sed_r(args...)`, `sed_r_z(args...)` | Run GNU sed, optionally with `-r` or `-r -z` |
 | `run_pipeline(new_pipeline(...))` | `pipe(...)` | Inline nested pipeline |
 | `run_list(new_list(...))` | `group(...)` | Inline nested list/orchestration |
 
@@ -136,7 +149,11 @@ assert result.trimmed_string() == '2'
 
 Use `grep_r(pattern)` for the simple typed regex filter over the current stream.
 
+Use `grep_r_v(pattern)` for the inverted typed regex case.
+
 Use `grep_p(args...)` when you want shell-like flags such as `-i`, `-n`, `-c`, `-q`, or when you want to match against files directly.
+
+Use `grep_p_v(args...)` for the inverted PCRE case.
 
 ```v
 import v_scr
@@ -144,6 +161,11 @@ import v_scr
 stream_result := v_scr.new_pipeline(
     v_scr.echo('warn\nWarning\n'),
     v_scr.grep_r('^warn')!,
+).exec()!
+
+inverse_stream_result := v_scr.new_pipeline(
+    v_scr.echo('warn\ninfo\n'),
+    v_scr.grep_r_v('^warn')!,
 ).exec()!
 
 pcre_result := v_scr.new_list(
@@ -175,10 +197,27 @@ result := v_scr.new_list(
     v_scr.cd(os.vtmp_dir()),
     v_scr.pipe(
         v_scr.echo('release: demo-app\n'),
-        v_scr.to_f(target),
+        v_scr.stdout(target, false),
     ),
     v_scr.echo('written to ${target}\n'),
 ).exec()!
+```
+
+### `head()` and `tail()` with negative values
+
+`head(-n)` keeps all but the last `n` lines.
+
+`tail(-n)` skips the first `n` lines.
+
+```v
+import v_scr
+
+result := v_scr.new_pipeline(
+    v_scr.echo('one\ntwo\nthree\nfour\n'),
+    v_scr.head(-1),
+).exec()!
+
+assert result.trimmed_string() == 'one\ntwo\nthree'
 ```
 
 ### Reusable sequences with `call()` and `invoke()`

@@ -35,6 +35,16 @@ fn test_which_returns_path() {
     assert result.trimmed_string() != ''
 }
 
+fn test_pwd_uses_pipe_cwd() {
+    target := '/tmp'
+    result := v_scr.new_list(
+        v_scr.cd(target),
+        v_scr.pwd(),
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == target
+}
+
 fn test_set_cwd_affects_process() {
     $if windows {
         return
@@ -59,6 +69,19 @@ fn test_sed_filter() {
     ).exec() or { panic(err) }
 
     assert result.trimmed_string() == 'aBc'
+}
+
+fn test_sed_r_filter() {
+    $if windows {
+        return
+    }
+    step := v_scr.sed_r('s/(ab)c/\\1C/g') or { panic(err) }
+    result := v_scr.new_pipeline(
+        v_scr.echo('abc'),
+        step,
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'abC'
 }
 
 fn test_sed_in_place_file_edit() {
@@ -139,4 +162,28 @@ fn test_invoke_preserves_outer_env_and_cwd_context() {
     ).exec() or { panic(err) }
 
     assert result.trimmed_string() == 'outer|/tmp'
+}
+
+fn test_ls_l_mentions_file_name() {
+    $if windows {
+        return
+    }
+    base := os.join_path(os.vtmp_dir(), 'v_scr_ls_l_test')
+    file_path := os.join_path(base, 'demo.txt')
+    os.rmdir_all(base) or {}
+    os.mkdir_all(base) or { panic(err) }
+    os.write_file(file_path, 'ok') or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    result := v_scr.new_list(
+        v_scr.ls_l(base),
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.string().contains('demo.txt')
+    os.rmdir_all(base) or {}
 }

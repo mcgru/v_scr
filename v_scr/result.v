@@ -24,13 +24,13 @@ pub fn (result RunResult) string() string {
 }
 
 // stderr_string returns stderr as a string.
-// Example: result := v_scr.exec_pipeline(v_scr.to_stderr()) or { return }; _ = result.stderr_string()
+// Example: result := v_scr.exec_pipeline(v_scr.stderr()) or { return }; _ = result.stderr_string()
 pub fn (result RunResult) stderr_string() string {
     return result.stderr.bytestr()
 }
 
 // stderr_bytes returns stderr as raw bytes.
-// Example: result := v_scr.exec_pipeline(v_scr.to_stderr()) or { return }; _ = result.stderr_bytes()
+// Example: result := v_scr.exec_pipeline(v_scr.stderr()) or { return }; _ = result.stderr_bytes()
 pub fn (result RunResult) stderr_bytes() []u8 {
     return result.stderr.clone()
 }
@@ -52,7 +52,7 @@ pub fn (result RunResult) strings() []string {
 }
 
 // stderr_strings splits trimmed stderr into lines.
-// Example: result := v_scr.exec_pipeline(v_scr.echo('warn'), v_scr.to_stderr()) or { return }; _ = result.stderr_strings()
+// Example: result := v_scr.exec_pipeline(v_scr.echo('warn'), v_scr.stderr()) or { return }; _ = result.stderr_strings()
 pub fn (result RunResult) stderr_strings() []string {
     text := result.stderr_string().trim_space()
     if text == '' {

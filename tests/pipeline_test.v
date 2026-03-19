@@ -77,6 +77,16 @@ fn test_grep_r_and_sort() {
     assert result.trimmed_string() == 'alpha\natom'
 }
 
+fn test_grep_r_v_excludes_matches() {
+    step := v_scr.grep_r_v('^a.*') or { panic(err) }
+    result := v_scr.new_pipeline(
+        v_scr.echo('beta\nalpha\natom\n'),
+        step,
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'beta'
+}
+
 fn test_grep_p_flags_on_stdin() {
     step := v_scr.grep_p('-in', '^warn') or { panic(err) }
     result := v_scr.new_pipeline(
@@ -103,6 +113,31 @@ fn test_grep_p_count_and_quiet_on_stdin() {
     assert count_result.trimmed_string() == '3'
     assert quiet_result.status_code() == 1
     assert quiet_result.string() == ''
+}
+
+fn test_grep_p_v_on_stdin() {
+    step := v_scr.grep_p_v('^warn') or { panic(err) }
+    result := v_scr.new_pipeline(
+        v_scr.echo('warn\ninfo\nwarn-now\n'),
+        step,
+    ).exec() or { panic(err) }
+
+    assert result.trimmed_string() == 'info'
+}
+
+fn test_head_and_tail_negative_values() {
+    head_result := v_scr.new_pipeline(
+        v_scr.echo('one\ntwo\nthree\nfour\n'),
+        v_scr.head(-1),
+    ).exec() or { panic(err) }
+
+    tail_result := v_scr.new_pipeline(
+        v_scr.echo('one\ntwo\nthree\nfour\n'),
+        v_scr.tail(-2),
+    ).exec() or { panic(err) }
+
+    assert head_result.trimmed_string() == 'one\ntwo\nthree'
+    assert tail_result.trimmed_string() == 'three\nfour'
 }
 
 fn test_list_accumulates_stdout() {

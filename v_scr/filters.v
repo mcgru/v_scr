@@ -94,6 +94,23 @@ pub fn grep_r(pattern string) !Step {
 	}
 }
 
+// grep_r_v creates an inverted lightweight regex filter over the current stream.
+// Example: _ := v_scr.grep_r_v('^debug') or { panic(err) }
+pub fn grep_r_v(pattern string) !Step {
+	mut re := regex.regex_opt(pattern)!
+	return fn [mut re] (mut pipe Pipe) ! {
+		lines := pipe.stdin.bytestr().split_into_lines()
+		mut matched := []string{}
+		for line in lines {
+			if !re.matches_string(line) {
+				matched << line
+			}
+		}
+		pipe.stdout = matched.join('\n').bytes()
+		pipe.status = if matched.len > 0 { 0 } else { 1 }
+	}
+}
+
 // grep_p creates a shell-like PCRE grep with flags and optional file arguments.
 // Example: _ := v_scr.grep_p('-in', '^warn', 'app.log') or { panic(err) }
 pub fn grep_p(args ...string) !Step {
@@ -166,6 +183,14 @@ pub fn grep_p(args ...string) !Step {
 	}
 }
 
+// grep_p_v creates an inverted shell-like PCRE grep.
+// Example: _ := v_scr.grep_p_v('^debug', 'app.log') or { panic(err) }
+pub fn grep_p_v(args ...string) !Step {
+	mut values := ['-v']
+	values << args.clone()
+	return grep_p(...values)
+}
+
 // sed creates a step that delegates to the external `sed` command.
 // Example: _ := v_scr.sed('s/a/A/g') or { panic(err) }
 pub fn sed(args ...string) !Step {
@@ -178,24 +203,52 @@ pub fn sed(args ...string) !Step {
     }
 }
 
-// head creates a step that keeps the first n input lines.
+// sed_r creates a GNU sed step with `-r` enabled.
+// Example: _ := v_scr.sed_r('s/(a+)/A/g') or { panic(err) }
+pub fn sed_r(args ...string) !Step {
+    mut values := ['-r']
+    values << args.clone()
+    return sed(...values)
+}
+
+// sed_r_z creates a GNU sed step with `-r -z` enabled.
+// Example: _ := v_scr.sed_r_z('s/a/A/g') or { panic(err) }
+pub fn sed_r_z(args ...string) !Step {
+    mut values := ['-r', '-z']
+    values << args.clone()
+    return sed(...values)
+}
+
+// head creates a step that keeps the first n input lines, or all but the last abs(n) lines when n is negative.
 // Example: _ := v_scr.head(5)
 pub fn head(n int) Step {
     return fn [n] (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
-        limit := if n < lines.len { n } else { lines.len }
-        pipe.stdout = lines[..limit].join('\n').bytes()
+        if n >= 0 {
+            limit := if n < lines.len { n } else { lines.len }
+            pipe.stdout = lines[..limit].join('\n').bytes()
+            pipe.status = 0
+            return
+        }
+        exclude := imin(-n, lines.len)
+        pipe.stdout = lines[..lines.len - exclude].join('\n').bytes()
         pipe.status = 0
     }
 }
 
-// tail creates a step that keeps the last n input lines.
+// tail creates a step that keeps the last n input lines, or skips the first abs(n) lines when n is negative.
 // Example: _ := v_scr.tail(5)
 pub fn tail(n int) Step {
     return fn [n] (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
-        start := if n < lines.len { lines.len - n } else { 0 }
-        pipe.stdout = lines[start..].join('\n').bytes()
+        if n >= 0 {
+            start := if n < lines.len { lines.len - n } else { 0 }
+            pipe.stdout = lines[start..].join('\n').bytes()
+            pipe.status = 0
+            return
+        }
+        skip := imin(-n, lines.len)
+        pipe.stdout = lines[skip..].join('\n').bytes()
         pipe.status = 0
     }
 }
@@ -380,4 +433,8 @@ fn format_grep_p_label(file string, line_no int, with_number bool, with_file boo
 fn grep_p_line_matches(re pcre.Regex, line string) bool {
 	re.find(line) or { return false }
 	return true
+}
+
+fn imin(a int, b int) int {
+	return if a < b { a } else { b }
 }

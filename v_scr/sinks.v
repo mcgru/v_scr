@@ -2,26 +2,51 @@ module v_scr
 
 import os
 
-// to_stdout creates a step that prints the active stream to stdout.
-// Example: _ := v_scr.to_stdout()
-pub fn to_stdout() Step {
-    return fn (mut pipe Pipe) ! {
+type OutputArg = bool | string
+
+// stdout creates a step that prints the active stream, or writes/appends it to a file.
+// Example: _ := v_scr.stdout('/tmp/demo.txt', false)
+pub fn stdout(args ...OutputArg) Step {
+    path, append := parse_output_args(args)
+    return fn [path, append] (mut pipe Pipe) ! {
         data := active_stream(pipe)
-        print(data.bytestr())
+        if path == '' {
+            print(data.bytestr())
+            pipe.status = 0
+            return
+        }
+        write_stream_to_file(expand(path, pipe), data, append)!
         pipe.status = 0
     }
 }
 
-// to_stderr creates a step that prints the active stream to stderr.
-// Example: _ := v_scr.to_stderr()
-pub fn to_stderr() Step {
-    return fn (mut pipe Pipe) ! {
+// to_stdout is a compatibility alias for stdout().
+// Example: _ := v_scr.to_stdout()
+pub fn to_stdout() Step {
+    return stdout()
+}
+
+// stderr creates a step that prints the active stream to stderr, or writes/appends it to a file while retaining stderr capture.
+// Example: _ := v_scr.stderr('/tmp/demo.err')
+pub fn stderr(args ...OutputArg) Step {
+    path, append := parse_output_args(args)
+    return fn [path, append] (mut pipe Pipe) ! {
         data := active_stream(pipe)
-        eprint(data.bytestr())
+        if path == '' {
+            eprint(data.bytestr())
+        } else {
+            write_stream_to_file(expand(path, pipe), data, append)!
+        }
         pipe.stderr << data
         pipe.stdout = []u8{}
         pipe.status = 0
     }
+}
+
+// to_stderr is a compatibility alias for stderr().
+// Example: _ := v_scr.to_stderr()
+pub fn to_stderr() Step {
+    return stderr()
 }
 
 // write_to_file creates a step that writes the active stream to a file.
@@ -86,4 +111,31 @@ pub fn exit_(status int) Step {
         pipe.stopped = true
         pipe.stop_kind = .exit_all
     }
+}
+
+fn write_stream_to_file(path string, data []u8, append bool) ! {
+    if append {
+        existing := os.read_file(path) or { '' }
+        os.write_file(path, existing + data.bytestr())!
+        return
+    }
+    os.write_file(path, data.bytestr())!
+}
+
+fn parse_output_args(args []OutputArg) (string, bool) {
+    mut path := ''
+    mut append := true
+    for arg in args {
+        match arg {
+            string {
+                if path == '' {
+                    path = arg
+                }
+            }
+            bool {
+                append = arg
+            }
+        }
+    }
+    return path, append
 }
