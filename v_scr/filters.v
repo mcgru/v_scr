@@ -15,6 +15,8 @@ mut:
 	quiet       bool
 }
 
+// trim_whitespace creates a step that trims leading and trailing whitespace.
+// Example: _ := v_scr.trim_whitespace()
 pub fn trim_whitespace() Step {
 	return fn (mut pipe Pipe) ! {
 		pipe.stdout = pipe.stdin.bytestr().trim_space().bytes()
@@ -22,6 +24,8 @@ pub fn trim_whitespace() Step {
 	}
 }
 
+// count_lines creates a step that counts input lines.
+// Example: _ := v_scr.count_lines()
 pub fn count_lines() Step {
 	return fn (mut pipe Pipe) ! {
 		text := pipe.stdin.bytestr()
@@ -31,6 +35,8 @@ pub fn count_lines() Step {
 	}
 }
 
+// count_words creates a step that counts whitespace-delimited words.
+// Example: _ := v_scr.count_words()
 pub fn count_words() Step {
 	return fn (mut pipe Pipe) ! {
 		count := pipe.stdin.bytestr().fields().len
@@ -39,6 +45,8 @@ pub fn count_words() Step {
 	}
 }
 
+// grep creates a substring filter over the current stream.
+// Example: _ := v_scr.grep('error') or { panic(err) }
 pub fn grep(pattern string) !Step {
 	return fn [pattern] (mut pipe Pipe) ! {
 		lines := pipe.stdin.bytestr().split_into_lines()
@@ -53,6 +61,8 @@ pub fn grep(pattern string) !Step {
 	}
 }
 
+// grep_v creates an inverted substring filter over the current stream.
+// Example: _ := v_scr.grep_v('debug') or { panic(err) }
 pub fn grep_v(pattern string) !Step {
 	return fn [pattern] (mut pipe Pipe) ! {
 		lines := pipe.stdin.bytestr().split_into_lines()
@@ -67,6 +77,8 @@ pub fn grep_v(pattern string) !Step {
 	}
 }
 
+// grep_r creates a lightweight regex filter over the current stream.
+// Example: _ := v_scr.grep_r('^warn') or { panic(err) }
 pub fn grep_r(pattern string) !Step {
 	mut re := regex.regex_opt(pattern)!
 	return fn [mut re] (mut pipe Pipe) ! {
@@ -82,6 +94,8 @@ pub fn grep_r(pattern string) !Step {
 	}
 }
 
+// grep_p creates a shell-like PCRE grep with flags and optional file arguments.
+// Example: _ := v_scr.grep_p('-in', '^warn', 'app.log') or { panic(err) }
 pub fn grep_p(args ...string) !Step {
 	values := args.clone()
 	config := parse_grep_p_args(values)!
@@ -152,6 +166,8 @@ pub fn grep_p(args ...string) !Step {
 	}
 }
 
+// sed creates a step that delegates to the external `sed` command.
+// Example: _ := v_scr.sed('s/a/A/g') or { panic(err) }
 pub fn sed(args ...string) !Step {
     values := args.clone()
     if values.len == 0 {
@@ -162,6 +178,8 @@ pub fn sed(args ...string) !Step {
     }
 }
 
+// head creates a step that keeps the first n input lines.
+// Example: _ := v_scr.head(5)
 pub fn head(n int) Step {
     return fn [n] (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -171,6 +189,8 @@ pub fn head(n int) Step {
     }
 }
 
+// tail creates a step that keeps the last n input lines.
+// Example: _ := v_scr.tail(5)
 pub fn tail(n int) Step {
     return fn [n] (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -180,6 +200,8 @@ pub fn tail(n int) Step {
     }
 }
 
+// uniq creates a step that removes duplicate lines while preserving order.
+// Example: _ := v_scr.uniq()
 pub fn uniq() Step {
     return fn (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -197,6 +219,8 @@ pub fn uniq() Step {
     }
 }
 
+// sort creates a step that sorts lines in ascending order.
+// Example: _ := v_scr.sort()
 pub fn sort() Step {
     return fn (mut pipe Pipe) ! {
         mut lines := pipe.stdin.bytestr().split_into_lines()
@@ -206,6 +230,8 @@ pub fn sort() Step {
     }
 }
 
+// rsort creates a step that sorts lines in descending order.
+// Example: _ := v_scr.rsort()
 pub fn rsort() Step {
     return fn (mut pipe Pipe) ! {
         mut lines := pipe.stdin.bytestr().split_into_lines()
@@ -216,6 +242,8 @@ pub fn rsort() Step {
     }
 }
 
+// basename creates a step that maps each input line to its base path component.
+// Example: _ := v_scr.basename()
 pub fn basename() Step {
     return fn (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -228,6 +256,8 @@ pub fn basename() Step {
     }
 }
 
+// dirname creates a step that maps each input line to its directory component.
+// Example: _ := v_scr.dirname()
 pub fn dirname() Step {
     return fn (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -240,6 +270,8 @@ pub fn dirname() Step {
     }
 }
 
+// strip_extension creates a step that removes the final file extension from each line.
+// Example: _ := v_scr.strip_extension()
 pub fn strip_extension() Step {
     return fn (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()
@@ -252,6 +284,8 @@ pub fn strip_extension() Step {
     }
 }
 
+// swap_extensions creates a step that replaces one extension with another.
+// Example: _ := v_scr.swap_extensions('.txt', '.md')
 pub fn swap_extensions(old_ext string, new_ext string) Step {
     return fn [old_ext, new_ext] (mut pipe Pipe) ! {
         lines := pipe.stdin.bytestr().split_into_lines()

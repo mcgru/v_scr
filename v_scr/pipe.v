@@ -6,6 +6,8 @@ enum StopKind {
     exit_all
 }
 
+// Pipe carries the mutable execution state shared by steps in a sequence.
+// Example: mut pipe := v_scr.new_pipe(); _ = pipe
 pub struct Pipe {
 pub mut:
     stdin  []u8
@@ -21,6 +23,8 @@ pub mut:
     stop_kind StopKind
 }
 
+// new_pipe creates an empty execution context with zero status and empty env.
+// Example: pipe := v_scr.new_pipe(); _ = pipe
 pub fn new_pipe() Pipe {
     return Pipe{
         status: 0
@@ -32,6 +36,8 @@ pub fn new_pipe() Pipe {
     }
 }
 
+// result snapshots the current pipe state into a RunResult value.
+// Example: mut pipe := v_scr.new_pipe(); result := pipe.result(); _ = result
 pub fn (p Pipe) result() RunResult {
     return RunResult{
         stdout: p.stdout.clone()

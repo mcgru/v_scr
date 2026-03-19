@@ -2,6 +2,8 @@ module v_scr
 
 import os
 
+// exec creates a step that runs an external command with expanded args.
+// Example: _ := v_scr.exec('printf', '%s', 'hello')
 pub fn exec(cmd string, args ...string) Step {
     values := args.clone()
     return fn [cmd, values] (mut pipe Pipe) ! {
@@ -9,6 +11,8 @@ pub fn exec(cmd string, args ...string) Step {
     }
 }
 
+// sh creates a step that runs a shell command line after expansion.
+// Example: _ := v_scr.sh('printf "%s" "hello"')
 pub fn sh(line string) Step {
     return fn [line] (mut pipe Pipe) ! {
         expanded := expand(line, pipe)
