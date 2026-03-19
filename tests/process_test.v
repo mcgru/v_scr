@@ -1,4 +1,5 @@
 import v_scr
+import os
 
 fn test_exec_cat_stdin_roundtrip() {
     $if windows {
@@ -58,6 +59,31 @@ fn test_sed_filter() {
     ).exec() or { panic(err) }
 
     assert result.trimmed_string() == 'aBc'
+}
+
+fn test_sed_in_place_file_edit() {
+    $if windows {
+        return
+    }
+    base := os.join_path(os.vtmp_dir(), 'v_scr_sed_in_place_test')
+    file_path := os.join_path(base, 'demo.txt')
+    os.rmdir_all(base) or {}
+    os.mkdir_all(base) or { panic(err) }
+    os.write_file(file_path, 'alpha beta') or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    result := v_scr.new_list(
+        v_scr.sed('-i', 's/beta/BETA/g', file_path) or { panic(err) },
+    ).exec() or {
+        os.rmdir_all(base) or {}
+        panic(err)
+    }
+
+    assert result.status_code() == 0
+    assert os.read_file(file_path) or { '' } == 'alpha BETA'
+    os.rmdir_all(base) or {}
 }
 
 fn test_non_zero_exit_code_and_stderr_capture() {

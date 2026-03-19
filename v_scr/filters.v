@@ -70,9 +70,13 @@ pub fn grep_r(pattern string) !Step {
     }
 }
 
-pub fn sed(expr string) !Step {
-    return fn [expr] (mut pipe Pipe) ! {
-        run_process(mut pipe, 'sed', [expr])!
+pub fn sed(args ...string) !Step {
+    values := args.clone()
+    if values.len == 0 {
+        return error('sed() expects at least one sed argument')
+    }
+    return fn [values] (mut pipe Pipe) ! {
+        run_process(mut pipe, 'sed', values)!
     }
 }
 
