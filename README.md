@@ -6,28 +6,57 @@ The goal is to make automation code read closer to Bash while keeping V's explic
 
 ## Status
 
-This repository currently contains a working `0.1.x`-level MVP:
+This repository contains a working `0.2.0` release with:
 
 - core runtime types
 - `Pipeline` and `List`
 - result helpers
 - process execution on top of `os.new_process()`
-- variable expansion for args, locals, and env
-- a first batch of sources, filters, sinks, builtins, and logic helpers
+- variable expansion for args, locals, and env with enhanced parameter expansion
+- sources, filters, sinks, builtins, and logic helpers
+- file utilities: `cp`, `mv`, `ln`, `readlink`, `realpath`
+- streaming helpers for large file processing
 - runnable examples and tests for process, file, and nested-sequence semantics
+
+## What's New in v0.2.0
+
+**File Utilities:**
+- `cp(src, dst)` - Copy files and directories with `-r`, `-f`, `-q` flags
+- `mv(src, dst)` - Move/rename files with `-f`, `-q` flags
+- `ln(args...)` - Create hard and symbolic links with `-s`, `-f`, `-q` flags
+- `readlink(args...)` - Read symbolic link targets
+- `realpath(args...)` - Get canonical absolute paths
+
+**Enhanced Parameter Expansion:**
+- `${VAR:-default}` - Use default if VAR is unset or empty
+- `${VAR:+value}` - Use value if VAR is set
+- `${#VAR}` - String length
+- `${VAR^^}` - Convert to uppercase
+- `${VAR,,}` - Convert to lowercase
+- `${VAR:offset}` - Substring from offset
+- `${VAR:offset:len}` - Substring with length
+
+**Streaming Support:**
+- `stream_lines(path, processor)` - Process large files line by line
+- `stream_lines_filtered(path, predicate)` - Filter lines from large files
+- `head_stream(n, path)` - Efficiently read first n lines
+- `tail_stream(n, path)` - Efficiently read last n lines
+- `grep_stream(pattern, path)` - Stream grep for large files
+- `wc_stream(path)` - Count lines, words, bytes
 
 ## Packaging notes
 
-The package is already structured as a normal V module with `v.mod`, runnable examples, and tests.
+The package is structured as a normal V module with `v.mod`, runnable examples, and tests.
 
-The next release-facing step is packaging polish for VPM publication, not core runtime work.
+Ready for VPM publication.
 
 ## API stability
 
-For `0.1.x`, treat the long names as canonical API:
+For `0.2.x`, treat the long names as canonical API:
 
 - `cat`, `stdout`, `stderr`, `write_to_file`, `append_to_file`
 - `rm`, `rmdir`, `pwd`
+- `cp`, `mv`, `ln`, `readlink`, `realpath`
 - `set_args`, `set_env_var`, `set_local`, `set_cwd`
 - `run_pipeline`, `run_list`
 
@@ -35,7 +64,7 @@ Treat the short names as stable scripting aliases:
 
 - `cat_file`, `cat_stdin`, `from_file`, `from_f`
 - `to_stdout`, `to_stderr`, `to_file`, `to_f`, `append_file`, `append_f`
-- `rm_file`, `rm_dir`
+- `rm_file`, `rm_dir`, `cp_file`, `mv_file`
 - `args`, `env`, `local_`, `cd`
 - `pipe`, `group`
 
@@ -119,6 +148,11 @@ Use the short names when you are writing shell-like scripts and the intent is al
 | `test_filepath_exists(path)` | `exists(path)` | Guard/check before branching |
 | `rm(args...)` | `rm_file(path)` | Remove files, and directories with `-r` |
 | `rmdir(args...)` | `rm_dir(path)` | Remove directories, with `-r`, `-f`, `-q` flags |
+| `cp(args...)` | `cp_file(src, dst)` | Copy files, with `-r`, `-f`, `-q` flags |
+| `mv(args...)` | `mv_file(src, dst)` | Move/rename files, with `-f`, `-q` flags |
+| `ln(args...)` | - | Create links, with `-s`, `-f`, `-q` flags |
+| `readlink(args...)` | - | Read symbolic link targets |
+| `realpath(args...)` | - | Get canonical absolute path |
 | `pwd()` | - | Emit the current pipe working directory |
 | `set_args(...)` | `args(...)` | Positional args for a sequence |
 | `set_env_var(name, value)` | `env(name, value)` | Environment setup before `exec()` / `sh()` |
@@ -130,6 +164,12 @@ Use the short names when you are writing shell-like scripts and the intent is al
 | `sed(args...)` | `sed_r(args...)`, `sed_r_z(args...)` | Run GNU sed, optionally with `-r` or `-r -z` |
 | `run_pipeline(new_pipeline(...))` | `pipe(...)` | Inline nested pipeline |
 | `run_list(new_list(...))` | `group(...)` | Inline nested list/orchestration |
+| `stream_lines(path, proc)` | - | Process large files line by line |
+| `stream_lines_filtered(path, pred)` | - | Filter lines from large files |
+| `head_stream(n, path)` | - | Efficiently read first n lines |
+| `tail_stream(n, path)` | - | Efficiently read last n lines |
+| `grep_stream(pattern, path)` | - | Stream grep for large files |
+| `wc_stream(path)` | - | Count lines, words, bytes |
 
 ## Examples
 

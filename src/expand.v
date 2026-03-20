@@ -1,6 +1,7 @@
 module v_scr
 
 import os
+import strconv
 
 // expand resolves shell-like variables against the current pipe context.
 // Example: _ = v_scr.expand(r'$HOME', v_scr.new_pipe())
@@ -176,11 +177,122 @@ fn merged_environment(pipe Pipe) map[string]string {
 }
 
 fn resolve_braced(expr string, pipe Pipe) string {
+    // Handle indirect reference: ${!VAR}
     if expr.len > 1 && expr[0] == `!` {
         target := resolve_name(expr[1..], pipe)
         return resolve_name(target, pipe)
     }
+    
+    // Parse parameter expansion operators
+    // ${VAR:-default}  - use default if VAR is unset or empty
+    // ${VAR:=default}  - assign default if VAR is unset or empty
+    // ${VAR:+value}    - use value if VAR is set (otherwise empty)
+    // ${VAR:offset}    - substring from offset
+    // ${VAR:offset:len} - substring from offset with length
+    // ${#VAR}          - string length
+    // ${VAR^^}         - uppercase
+    // ${VAR,,}         - lowercase
+    
+    // Check for length operator: ${#VAR}
+    if expr.len > 1 && expr[0] == `#` {
+        value := resolve_name(expr[1..], pipe)
+        return value.len.str()
+    }
+    
+    // Check for case modification: ${VAR^^} or ${VAR,,}
+    if expr.len > 2 {
+        if expr.ends_with('^^') {
+            name := expr[..expr.len - 2]
+            value := resolve_name(name, pipe)
+            return value.to_upper()
+        }
+        if expr.ends_with(',,') {
+            name := expr[..expr.len - 2]
+            value := resolve_name(name, pipe)
+            return value.to_lower()
+        }
+    }
+    
+    // Check for substring: ${VAR:offset} or ${VAR:offset:len}
+    // First, find if there's a colon that's not part of :- := :+
+    colon_pos := find_substring_colon(expr)
+    if colon_pos > 0 {
+        name := expr[..colon_pos]
+        rest := expr[colon_pos + 1..]
+        
+        // Check if this is :- := :+ (default/assign/value operators)
+        if rest.len > 0 && (rest[0] == `-` || rest[0] == `=` || rest[0] == `+`) {
+            // This is a default/assign/value operator, handle below
+        } else {
+            // This is a substring operation
+            parts := rest.split(':')
+            offset_str := parts[0]
+            offset := strconv.atoi(offset_str) or { 0 }
+            
+            len_str := if parts.len >= 2 { parts[1] } else { '' }
+            
+            value := resolve_name(name, pipe)
+            result := apply_substring(value, offset, len_str)
+            return result
+        }
+    }
+    
+    // Check for default/assign/value operators: ${VAR:-default}, ${VAR:=default}, ${VAR:+value}
+    for i := 0; i < expr.len; i++ {
+        if expr[i] == `:` && i + 1 < expr.len {
+            op := expr[i + 1]
+            if op == `-` || op == `=` || op == `+` {
+                name := expr[..i]
+                operand := expr[i + 2..]
+                
+                value := resolve_name(name, pipe)
+                is_set := name in pipe.locals || name in pipe.env || (name.len == 1 && is_digit(name[0]) && resolve_arg(name[0] - `0`, pipe) != '')
+                is_empty := value == ''
+                
+                match op {
+                    `-` {
+                        // ${VAR:-default} - use default if unset or empty
+                        if !is_set || is_empty {
+                            return expand(operand, pipe)
+                        }
+                        return value
+                    }
+                    `+` {
+                        // ${VAR:+value} - use value if set
+                        if is_set {
+                            return expand(operand, pipe)
+                        }
+                        return ''
+                    }
+                    `=` {
+                        // ${VAR:=default} - assign default if unset or empty
+                        // For now, just return the default without storing (would need mut pipe)
+                        return expand(operand, pipe)
+                    }
+                    else {}
+                }
+            }
+        }
+    }
+    
     return resolve_name(expr, pipe)
+}
+
+fn find_substring_colon(expr string) int {
+    // Find the first colon that's part of substring syntax (not :- := :+)
+    for i := 0; i < expr.len; i++ {
+        if expr[i] == `:` {
+            // Check if next char is - = or + (default/assign/value operators)
+            if i + 1 < expr.len {
+                next := expr[i + 1]
+                if next == `-` || next == `=` || next == `+` {
+                    continue // Skip this colon
+                }
+            }
+            return i
+        }
+    }
+    return -1
 }
 
 fn resolve_name(name string, pipe Pipe) string {
@@ -235,4 +347,41 @@ fn is_var_char(ch u8) bool {
 
 fn is_alpha(ch u8) bool {
     return (ch >= `a` && ch <= `z`) || (ch >= `A` && ch <= `Z`)
+}
+
+fn apply_substring(value string, offset int, len_str string) string {
+    mut start := offset
+    mut count := value.len
+    
+    // Handle negative offset (from end)
+    if start < 0 {
+        start = value.len + start
+        if start < 0 {
+            start = 0
+        }
+    }
+    
+    // Handle length if specified
+    if len_str != '' {
+        parsed_len := strconv.atoi(len_str) or { value.len }
+        if parsed_len >= 0 {
+            count = parsed_len
+        } else {
+            // Negative length: exclude that many characters from the end
+            count = value.len - start + parsed_len
+            if count < 0 {
+                count = 0
+            }
+        }
+    }
+    
+    // Bounds checking
+    if start >= value.len {
+        return ''
+    }
+    if start + count > value.len {
+        count = value.len - start
+    }
+    
+    return value[start..start + count]
 }

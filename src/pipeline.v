@@ -21,6 +21,12 @@ pub fn exec_pipeline(steps ...Step) !RunResult {
     return new_pipeline(...steps).exec()
 }
 
+// run_pipe is a short alias for exec_pipeline.
+// Example: result := v_scr.run_pipe(v_scr.echo('a\\nb'), v_scr.count_lines()) or { return }; _ = result
+pub fn run_pipe(steps ...Step) !RunResult {
+    return exec_pipeline(...steps)
+}
+
 // exec runs the pipeline in a fresh Pipe.
 // Example: result := v_scr.new_pipeline(v_scr.echo('a\\nb'), v_scr.count_lines()).exec() or { return }; _ = result
 pub fn (pipeline Pipeline) exec() !RunResult {

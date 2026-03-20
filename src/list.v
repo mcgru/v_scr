@@ -21,6 +21,12 @@ pub fn exec_list(steps ...Step) !RunResult {
     return new_list(...steps).exec()
 }
 
+// run_group is a short alias for exec_list.
+// Example: result := v_scr.run_group(v_scr.echo('a'), v_scr.echo('b')) or { return }; _ = result
+pub fn run_group(steps ...Step) !RunResult {
+    return exec_list(...steps)
+}
+
 // exec runs the list in a fresh Pipe.
 // Example: result := v_scr.new_list(v_scr.echo('a'), v_scr.echo('b')).exec() or { return }; _ = result
 pub fn (list List) exec() !RunResult {
